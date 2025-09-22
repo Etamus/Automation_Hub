@@ -7,7 +7,7 @@ Através de uma interface web simples, o usuário pode realizar o login no SAP e
 
 ## Funcionalidades
 
-- **Servidor Web com Flask: Cria um servidor local para gerenciar as automações.**
+  - Servidor Web com Flask: Cria um servidor local para gerenciar as automações.
   - Execução Remota de Macros: Dispara a execução de macros VBA em planilhas Excel localizadas em um caminho de rede ou local, através de scripts PowerShell.
   - Controle de Login no SAP: O sistema mantém o estado de login, permitindo que as macros relacionadas ao SAP sejam executadas somente após a autenticação.
   - Fluxo de Login e Logout: Gerencia a autenticação no SAP de forma programática. O logout inclui a limpeza forçada de processos para garantir que o SAP não permaneça aberto.
@@ -20,25 +20,6 @@ Através de uma interface web simples, o usuário pode realizar o login no SAP e
   - sap_login_runner.ps1: Script PowerShell específico para o login no SAP.
   - cleanup_processes.ps1: Script PowerShell para encerrar processos do Excel e SAP em caso de erros ou no logout.
   - templates/index.html: A interface web do usuário.
-
-- **Carrinho de devoluções**
-  - Seleção de múltiplos itens antes de envio
-  - Possibilidade de cancelar ou finalizar em lote
-
-- **Upload de imagens**
-  - Armazena os anexos em diretório dedicado (`/web/uploads`)
-  - Nomeação única para evitar conflitos
-
----
-
-## Tecnologias Utilizadas
-
-- **Backend:** [Python](https://www.python.org/) com [Eel](https://github.com/python-eel/python-eel) (integração Python + HTML/JS)
-- **Frontend:** HTML5, CSS3, JavaScript (DOM + eventos dinâmicos)
-- **Bibliotecas JS:** 
-  - [Flatpickr](https://flatpickr.js.org/) (datas)
-  - [Feather Icons](https://feathericons.com/) (ícones)
-- **Gerenciamento de anexos:** `base64`, `uuid`, `os`
 
 ---
 
@@ -64,3 +45,4 @@ Através de uma interface web simples, o usuário pode realizar o login no SAP e
     ```bash
     python servidor_unico.py
     ```
+
