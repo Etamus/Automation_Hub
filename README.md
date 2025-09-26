@@ -1,4 +1,4 @@
-#  Portal Automation (VBA/SAP)
+#  Portal Automation (VBA/SAP/BW)
 
 Servidor web desenvolvido em Python com Flask, projetado para orquestrar a execução de tarefas de automação que envolvem macros VBA em planilhas Excel e interações com o sistema SAP.  
 Através de uma interface web simples, o usuário pode realizar o login no SAP e executar macros pré-configuradas de forma segura e controlada.
@@ -45,4 +45,5 @@ Através de uma interface web simples, o usuário pode realizar o login no SAP e
     ```bash
     python servidor_unico.py
     ```
+
 
