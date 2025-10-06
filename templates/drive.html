@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub Spare Parts - Drive Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/hub.css">
+    <link rel="stylesheet" href="/static/css/shared.css">
+    <style>
+        body {
+            align-items: center;
+            padding-top: 0;
+        }
+        .development-message { text-align: center; }
+        .development-message i { font-size: 5rem; color: #ffc107; margin-bottom: 20px; }
+        .development-message h1 { font-size: 2.5rem; font-weight: 700; color: #495057; }
+        .back-button { position: absolute; top: 20px; left: 20px; z-index: 10; padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.2s ease; }
+        .back-button:hover { background-color: #5a6268; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-button">&larr; Voltar ao Hub</a>
+
+    <div class="development-message">
+        <i class="fas fa-wrench"></i>
+        <h1>Em Desenvolvimento</h1>
+    </div>
+
+    <div class="fab" id="feedback-fab" title="Feedback e Demandas"> <i class="fas fa-comment-dots"></i> </div>
+    <div class="feedback-popup" id="feedback-popup">
+        <div class="modal-header">
+            <h2 id="modal-title">FAQ</h2>
+            <button class="close-button" id="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal-options" id="modal-options">
+            <button class="option-button" data-form="demanda">Deseja solicitar alguma demanda?</button>
+            <button class="option-button" data-form="sugestao">Tem alguma sugestão?</button>
+        </div>
+        <div class="iframe-container" id="iframe-container"> <iframe src="" frameborder="0"></iframe> </div>
+    </div>
+    
+    <script src="/static/js/shared.js" defer></script>
+</body>
+</html>

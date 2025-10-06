@@ -1,0 +1,128 @@
+/* --- Estilos para o Botão Flutuante (FAB) e o Pop-up de Feedback --- */
+
+/* O Botão Flutuante */
+.fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 4px Rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    /* --- Z-INDEX AUMENTADO --- */
+    z-index: 9998; 
+}
+.fab:hover {
+    transform: scale(1.1);
+    background-color: #0056b3;
+}
+
+/* A "caixinha" Pop-up */
+.feedback-popup {
+    position: fixed;
+    bottom: 100px; /* Posição acima do FAB */
+    right: 30px;
+    width: 90%;
+    max-width: 350px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    /* --- Z-INDEX AUMENTADO --- */
+    z-index: 9999;
+
+    /* Animação de entrada e saída */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transform-origin: bottom right;
+    transition: all 0.3s ease;
+}
+.feedback-popup.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Seta que aponta para o FAB */
+.feedback-popup::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #ffffff;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 15px 20px;
+    border-bottom: 1px solid #f0f2f5;
+}
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.close-button {
+    font-size: 2rem;
+    color: #999;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    line-height: 1;
+}
+.close-button:hover {
+    color: #333;
+}
+
+.modal-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+.option-button {
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+.option-button:hover {
+    background-color: #e9ecef;
+    border-color: #007bff;
+}
+
+.iframe-container {
+    display: none;
+    width: 100%;
+    height: 60vh; /* Altura do iframe */
+    padding: 0;
+    margin-top: -20px; /* Ajuste para remover espaço extra */
+}
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}

@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F7F8FA;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 80px 20px 20px 20px;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.back-button {
+    position: absolute; top: 20px; left: 20px; z-index: 10;
+    padding: 10px 20px; background-color: #6c757d; color: white;
+    text-decoration: none; border-radius: 8px; font-weight: 600;
+    transition: all 0.2s ease; font-size: 14px;
+}
+.back-button:hover { background-color: #5a6268; transform: translateY(-2px); }
+
+.container {
+    background-color: transparent;
+    text-align: center;
+    width: 90%;
+    max-width: 550px;
+}
+
+.main-title { font-size: 3rem; font-weight: 700; margin: 0 0 10px 0; color: #1c1e21; }
+
+/* --- AJUSTE 3: Aumentando o espaço abaixo do subtítulo --- */
+.subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 60px; /* Aumentado de 40px para 60px */
+}
+
+/* --- AJUSTE 2: Restaurando a barra de separação --- */
+.system-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #dee2e6; /* Linha adicionada */
+    padding-bottom: 30px; /* Espaçamento para a linha adicionado */
+}
+.system-selector label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.system-selector input[type="radio"] { -webkit-appearance: none; appearance: none; background-color: #fff; margin: 0; color: #6c757d; width: 1.25em; height: 1.25em; border: 0.15em solid #ced4da; border-radius: 50%; display: grid; place-content: center; }
+.system-selector input[type="radio"]::before { content: ""; width: 0.75em; height: 0.75em; border-radius: 50%; transform: scale(0); transition: 120ms transform ease-in-out; box-shadow: inset 1em 1em #007bff; }
+.system-selector input[type="radio"]:checked { border-color: #007bff; }
+.system-selector input[type="radio"]:checked::before { transform: scale(1); }
+
+/* --- AJUSTE 1: Aumentando o tamanho dos ícones --- */
+.system-selector img {
+    height: 30px; /* Aumentado de 25px para 30px */
+}
+
+.system-selector input:disabled + img { filter: grayscale(100%); opacity: 0.5; }
+
+.controls { max-width: 350px; margin: 0 auto; }
+.button { border: none; padding: 15px 20px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.2s ease; width: 100%; display: block; }
+.button:hover { transform: translateY(-2px); }
+.button:disabled { background-color: #cccccc !important; cursor: not-allowed; transform: none; opacity: 0.7; pointer-events: none; }
+.btn-login { background-color: #28a745; color: white; }
+.btn-login:hover { background-color: #218838; }
+.btn-logout { background-color: #dc3545; color: white; }
+.btn-logout:hover { background-color: #c82333; }
+#bw-extract-btn { background-color: #007bff; color: white; }
+#bw-extract-btn:hover { background-color: #0056b3; }
+.input-group { margin-bottom: 15px; text-align: left; }
+.input-group label { display: block; margin-bottom: 5px; font-weight: 500; color: #495057; }
+.input-group input { width: 100%; padding: 12px; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
+
+.tasks-section { margin-top: 40px; }
+.collapsible-header { display: flex; align-items: center; gap: 10px; cursor: pointer; color: #007bff; font-weight: 600; font-size: 1.1rem; user-select: none; }
+.collapsible-header .arrow { transition: transform 0.3s ease; }
+.collapsible-header.open .arrow { transform: rotate(90deg); }
+.collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+.button-container { display: flex; flex-direction: column; gap: 15px; align-items: center; padding-top: 20px; }
+.task-button {
+    display: flex; position: relative; align-items: center; justify-content: center;
+    background-color: #007bff; color: white; width: 100%; height: 52px;
+    overflow: hidden; font-size: 15px; font-weight: 600; border-radius: 12px;
+    transition: all 0.2s ease;
+}
+.task-button:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); }
+.task-button.disabled { background-color: #cccccc !important; cursor: not-allowed; transform: none; opacity: 0.7; pointer-events: none; box-shadow: none;}
+.button-text { flex-grow: 1; display: flex; align-items: center; justify-content: center; height: 100%; padding: 0 20px; transition: background-color 0.2s ease; }
+.task-button:not(.disabled) .button-text:hover { background-color: #0056b3; }
+.separator { position: absolute; right: 55px; top: 15%; height: 70%; width: 1px; background-color: rgba(255, 255, 255, 0.4); }
+.download-icon { position: absolute; right: 0; top: 0; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 18px; color: white; text-decoration: none; transition: background-color 0.2s ease; }
+.task-button:not(.disabled) .download-icon:hover { background-color: #0056b3; }
+.download-icon.inactive { color: rgba(255, 255, 255, 0.5); cursor: not-allowed; }
+.download-icon.inactive:hover { background-color: transparent; }
+
+.hidden { display: none !important; }
+.status-box {
+    position: fixed; top: 20px; right: 20px; z-index: 1000;
+    padding: 15px 20px; border-radius: 8px; font-weight: 500;
+    min-width: 250px; max-width: 400px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    visibility: hidden; opacity: 0; transform: translateX(20px);
+    transition: all 0.4s ease-in-out;
+}
+.status-box.visible { visibility: visible; opacity: 1; transform: translateX(0); }
+.status-box.processing { background-color: #e9ecef; color: #495057; }
+.status-box.success { background-color: #d4edda; color: #155724; }
+.status-box.error { background-color: #f8d7da; color: #721c24; }
+
+#loggedin-area .controls { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+#loggedin-area .button { width: 75%; }

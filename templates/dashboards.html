@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub Spare Parts - Dashboards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/hub.css">
+    <link rel="stylesheet" href="/static/css/shared.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 80px;
+            box-sizing: border-box;
+        }
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            color: #1c1e21;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 60px;
+        }
+        .dashboard-container { width: 95vw; height: 85vh; display: none; flex-direction: column; }
+        .dashboard-iframe { width: 100%; height: 100%; border: none; border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
+        .back-button { position: absolute; top: 20px; left: 20px; z-index: 10; padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.2s ease; }
+        .back-button:hover { background-color: #5a6268; transform: translateY(-2px); }
+        #selection-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; text-align: center; max-width: 550px; }
+        .system-selector { display: flex; justify-content: center; align-items: center; gap: 40px; margin-bottom: 30px; border-bottom: 1px solid #dee2e6; padding-bottom: 30px; width: 100%; max-width: 500px; }
+        .system-selector label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .system-selector input[type="radio"] { -webkit-appearance: none; appearance: none; background-color: #fff; margin: 0; color: currentColor; width: 1.15em; height: 1.15em; border: 0.15em solid currentColor; border-radius: 50%; display: grid; place-content: center; }
+        .system-selector input[type="radio"]::before { content: ""; width: 0.65em; height: 0.65em; border-radius: 50%; transform: scale(0); transition: 120ms transform ease-in-out; box-shadow: inset 1em 1em #007bff; }
+        .system-selector input[type="radio"]:checked::before { transform: scale(1); }
+        .system-selector img { height: 30px; }
+        
+        .dashboard-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            align-items: center;
+        }
+        .view-button {
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            background-color: #007bff;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            /* --- LARGURA REDUZIDA AINDA MAIS --- */
+            width: 50%;
+            max-width: 300px;
+        }
+        .view-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" id="back-btn" class="back-button">&larr; Voltar ao Hub</a>
+    
+    <div id="selection-screen">
+        <div style="text-align: center;">
+            <h1 class="main-title">Dashboards</h1>
+            <p class="subtitle">Selecione a plataforma para visualizar o relatório</p>
+        </div>
+        <div class="system-selector">
+            <label> <input type="radio" name="dashboard_system" value="looker" checked> <img src="/static/icones/looker_logo.png" alt="Logo Looker Studio"> </label>
+            <label> <input type="radio" name="dashboard_system" value="tableau"> <img src="/static/icones/tableau_logo.png" alt="Logo Tableau"> </label>
+        </div>
+        
+        <div id="looker-options" class="dashboard-options">
+            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/4589a8ca-81a5-4233-915e-0d1c00fdda20/page/p_0zwhymauid">Visão Gerencial Peças</button>
+            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/4b061ef2-9ddf-4120-b3e1-aaa692bd10c3/page/p_lvyh6guavd">Daily Revenue Block</button>
+            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/2d1dde98-6bc5-476c-937a-0b09d78e04e6/page/8NWNF">Stock Control</button>
+            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/83d4b36a-da22-4712-8199-abe2f436df52/page/cCPMF">Returns Control</button>
+            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/021f1eef-b3b6-4d5d-b67e-429e49e84398/page/p_elobwkgqtd">Receiving Control</button>
+        </div>
+        
+        <div id="tableau-options" class="dashboard-options hidden">
+            <button class="view-button" data-url="https://public.tableau.com/views/Navedofretev1_2/Freight_Vision?:embed=y&:display_count=yes&:showVizHome=no">Nave de Frete</button>
+        </div>
+    </div>
+
+    <div id="dashboard-view" class="dashboard-container"></div>
+    
+    <div class="fab" id="feedback-fab" title="Feedback e Demandas"> <i class="fas fa-comment-dots"></i> </div>
+    <div class="feedback-popup" id="feedback-popup">
+        <div class="modal-header">
+            <h2 id="modal-title">FAQ</h2>
+            <button class="close-button" id="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal-options" id="modal-options">
+            <button class="option-button" data-form="demanda">Deseja solicitar alguma demanda?</button>
+            <button class="option-button" data-form="sugestao">Tem alguma sugestão?</button>
+        </div>
+        <div class="iframe-container" id="iframe-container"> <iframe src="" frameborder="0"></iframe> </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectionScreen = document.getElementById('selection-screen');
+            const dashboardView = document.getElementById('dashboard-view');
+            const radios = document.querySelectorAll('input[name="dashboard_system"]');
+            const backButton = document.getElementById('back-btn');
+            let isViewingDashboard = false;
+
+            const lookerOptions = document.getElementById('looker-options');
+            const tableauOptions = document.getElementById('tableau-options');
+            const allViewButtons = document.querySelectorAll('.view-button');
+
+            function handleRadioChange() {
+                const selectedSystem = document.querySelector('input[name="dashboard_system"]:checked').value;
+                if (selectedSystem === 'looker') {
+                    lookerOptions.classList.remove('hidden');
+                    tableauOptions.classList.add('hidden');
+                } else {
+                    lookerOptions.classList.add('hidden');
+                    tableauOptions.classList.remove('hidden');
+                }
+            }
+
+            radios.forEach(radio => radio.addEventListener('change', handleRadioChange));
+
+            allViewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const dashboardUrl = button.getAttribute('data-url');
+                    
+                    dashboardView.innerHTML = ''; 
+                    const iframe = document.createElement('iframe');
+                    iframe.src = dashboardUrl;
+                    iframe.className = 'dashboard-iframe';
+                    iframe.setAttribute('allowfullscreen', '');
+                    dashboardView.appendChild(iframe);
+                    
+                    selectionScreen.style.display = 'none';
+                    dashboardView.style.display = 'flex';
+                    isViewingDashboard = true;
+                    updateBackButton();
+                });
+            });
+            
+            function updateBackButton() {
+                if (isViewingDashboard) {
+                    backButton.textContent = '← Voltar';
+                    backButton.href = '#'; 
+                } else {
+                    backButton.textContent = '← Voltar ao Hub';
+                    backButton.href = '/';
+                }
+            }
+
+            backButton.addEventListener('click', (event) => {
+                if (isViewingDashboard) {
+                    event.preventDefault(); 
+                    dashboardView.innerHTML = '';
+                    dashboardView.style.display = 'none';
+                    selectionScreen.style.display = 'flex';
+                    isViewingDashboard = false;
+                    updateBackButton();
+                }
+            });
+
+            // Script do componente de feedback
+            const fab = document.getElementById('feedback-fab');
+            const popup = document.getElementById('feedback-popup');
+            const closeBtn = document.getElementById('modal-close-btn');
+            const optionButtons = document.querySelectorAll('.option-button');
+            const modalOptions = document.getElementById('modal-options');
+            const iframeContainer = document.getElementById('iframe-container');
+            const feedbackIframe = iframeContainer.querySelector('iframe');
+            const modalTitle = document.getElementById('modal-title');
+
+            const forms = {
+                demanda: { title: "Solicitação de Demanda", url: "https://docs.google.com/forms/d/e/1FAIpQLSdBvCg6jU3XjXn-dFLfwRZU-fj80fMbAT1vv6J6hg9yUIH1Jg/viewform?embedded=true" },
+                sugestao: { title: "Sugestões de Melhoria", url: "https://docs.google.com/forms/d/e/1FAIpQLScIp_mkk0kMZuJgjchiq5O2fHGTkPSjXYpsi4G5Xw2e297C6w/viewform?embedded=true" }
+            };
+
+            const togglePopup = () => {
+                modalOptions.style.display = 'flex';
+                iframeContainer.style.display = 'none';
+                modalTitle.textContent = "FAQ";
+                popup.classList.toggle('visible');
+            };
+
+            fab.addEventListener('click', togglePopup);
+            closeBtn.addEventListener('click', togglePopup);
+            
+            popup.addEventListener('click', (e) => {
+                 if (e.target === popup) {
+                    togglePopup();
+                 }
+            });
+
+            optionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const formType = button.getAttribute('data-form');
+                    const formData = forms[formType];
+                    modalTitle.textContent = formData.title;
+                    feedbackIframe.src = formData.url;
+                    modalOptions.style.display = 'none';
+                    iframeContainer.style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
