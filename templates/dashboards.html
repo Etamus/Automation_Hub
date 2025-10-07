@@ -66,6 +66,41 @@
         .hidden {
             display: none !important;
         }
+        .area-button {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background-color: #28a745; /* Cor verde para diferenciar */
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    width: 50%;
+    max-width: 300px;
+}
+.area-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+.back-to-areas-button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    color: #212529;
+    background-color: #f8f9fa; /* Cor clara para ser discreto */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 50%;
+    max-width: 300px;
+    margin-top: 15px; /* Espaçamento para separar dos outros botões */
+    border: 1px solid #dee2e6;
+}
+.back-to-areas-button:hover {
+    background-color: #e2e6ea;
+}
     </style>
 </head>
 <body>
@@ -82,16 +117,76 @@
         </div>
         
         <div id="looker-options" class="dashboard-options">
-            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/4589a8ca-81a5-4233-915e-0d1c00fdda20/page/p_0zwhymauid">Visão Gerencial Peças</button>
-            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/4b061ef2-9ddf-4120-b3e1-aaa692bd10c3/page/p_lvyh6guavd">Daily Revenue Block</button>
-            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/2d1dde98-6bc5-476c-937a-0b09d78e04e6/page/8NWNF">Stock Control</button>
-            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/83d4b36a-da22-4712-8199-abe2f436df52/page/cCPMF">Returns Control</button>
-            <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/021f1eef-b3b6-4d5d-b67e-429e49e84398/page/p_elobwkgqtd">Receiving Control</button>
-        </div>
+
+    <div id="area-selection" class="dashboard-options area-selection-container">
+        <button class="area-button" data-area="order">Order</button>
+        <button class="area-button" data-area="recebimento">Recebimento</button>
+        <button class="area-button" data-area="inventario">Inventário</button>
+        <button class="area-button" data-area="faturamento">Faturamento</button>
+        <button class="area-button" data-area="reversa">Reversa</button>
+        <button class="area-button" data-area="custos">Custos</button>
+        <button class="area-button" data-area="safety">Safety</button>
+    </div>
+
+    <div id="dashboards-order" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://lookerstudio.google.com/u/0/reporting/4b061ef2-9ddf-4120-b3e1-aaa692bd10c3/page/p_lvyh6guavd?s=g2UtuRWsgLg">Daily Block</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+    <div id="dashboards-recebimento" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://lookerstudio.google.com/u/0/reporting/021f1eef-b3b6-4d5d-b67e-429e49e84398">Receipt management</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+    <div id="dashboards-inventario" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/2d1dde98-6bc5-476c-937a-0b09d78e04e6/page/8NWNF">Stock Control</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+    <div id="dashboards-reversa" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/83d4b36a-da22-4712-8199-abe2f436df52/page/cCPMF">Returns Control</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+    <div id="dashboards-faturamento" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/u/0/reporting/5b61e471-c338-4887-bd57-fe1f4a28fffb/page/p_8m74juigsd">Boletim de faturamento (D2C)</button>
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/u/0/reporting/29875f95-7c9c-447c-9d7a-6076f1f4d966/page/6CGCE">Gestão de transporte (B2B)</button>
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/cc6a31a8-aa2a-49af-982f-7c7d170103be/page/p_az16g8cxtd">New Calendar</button>
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/4589a8ca-81a5-4233-915e-0d1c00fdda20/page/p_0zwhymauid">Visão Gerencial Peças</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+    <div id="dashboards-custos" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/51b05d28-dee8-4577-aa5e-2d86eaba9f62/page/W3haF">SLA Monthly CSI</button>
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/818af536-436e-48a3-a441-049036815083/page/GTEPF">Projects</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+    <div id="dashboards-safety" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/ec62c048-7747-4f1d-917e-1a99a76fc58d/page/y4haF">Heinrich triangle</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+</div>
         
         <div id="tableau-options" class="dashboard-options hidden">
-            <button class="view-button" data-url="https://public.tableau.com/views/Navedofretev1_2/Freight_Vision?:embed=y&:display_count=yes&:showVizHome=no">Nave de Frete</button>
-        </div>
+
+    <div id="tableau-area-selection" class="dashboard-options area-selection-container">
+        <button class="area-button" data-area="tableau-custos">Custos</button>
+        <button class="area-button" data-area="tableau-monitoramento">Monitoramento</button>
+    </div>
+
+    <div id="dashboards-tableau-custos" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://public.tableau.com/views/Navedofretev1_2/Freight_Vision?:embed=y&:display_count=yes&:showVizHome=no">Nave do Frete</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+    <div id="dashboards-tableau-monitoramento" class="dashboard-options hidden">
+        <button class="view-button" data-url="https://lartableau.whirlpool.com/#/views/NFOnTime/ONTIME?:iid=1">ON TIME</button>
+        <button class="back-to-areas-button">← Voltar para Áreas</button>
+    </div>
+
+</div>
     </div>
 
     <div id="dashboard-view" class="dashboard-container"></div>
@@ -109,112 +204,168 @@
         <div class="iframe-container" id="iframe-container"> <iframe src="" frameborder="0"></iframe> </div>
     </div>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const selectionScreen = document.getElementById('selection-screen');
-            const dashboardView = document.getElementById('dashboard-view');
-            const radios = document.querySelectorAll('input[name="dashboard_system"]');
-            const backButton = document.getElementById('back-btn');
-            let isViewingDashboard = false;
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- CONSTANTES GLOBAIS DA PÁGINA ---
+        const selectionScreen = document.getElementById('selection-screen');
+        const dashboardView = document.getElementById('dashboard-view');
+        const radios = document.querySelectorAll('input[name="dashboard_system"]');
+        const backButton = document.getElementById('back-btn');
+        let isViewingDashboard = false;
 
-            const lookerOptions = document.getElementById('looker-options');
-            const tableauOptions = document.getElementById('tableau-options');
-            const allViewButtons = document.querySelectorAll('.view-button');
+        // --- CONSTANTES PARA A SELEÇÃO DE SISTEMA (LOOKER/TABLEAU) ---
+        const lookerOptions = document.getElementById('looker-options');
+        const tableauOptions = document.getElementById('tableau-options');
+        
+        // --- CONSTANTES PARA A NAVEGAÇÃO POR ÁREAS ---
+        const allAreaContainers = document.querySelectorAll('.area-selection-container');
+        const allAreaButtons = document.querySelectorAll('.area-button');
+        const allDashboardGroups = document.querySelectorAll('.dashboard-options[id^="dashboards-"]');
+        const allBackToAreasButtons = document.querySelectorAll('.back-to-areas-button');
+        
+        // --- CONSTANTE PARA OS BOTÕES DE DASHBOARD FINAIS ---
+        const allViewButtons = document.querySelectorAll('.view-button');
 
-            function handleRadioChange() {
-                const selectedSystem = document.querySelector('input[name="dashboard_system"]:checked').value;
-                if (selectedSystem === 'looker') {
-                    lookerOptions.classList.remove('hidden');
-                    tableauOptions.classList.add('hidden');
-                } else {
-                    lookerOptions.classList.add('hidden');
-                    tableauOptions.classList.remove('hidden');
-                }
-            }
+        // --- LÓGICA PARA ALTERNAR ENTRE LOOKER E TABLEAU (CORRIGIDA) ---
+        function resetViews() {
+            // Esconde todos os grupos de dashboards específicos
+            allDashboardGroups.forEach(group => group.classList.add('hidden'));
+            // Mostra todos os menus de seleção de área
+            allAreaContainers.forEach(container => container.classList.remove('hidden'));
+        }
 
-            radios.forEach(radio => radio.addEventListener('change', handleRadioChange));
-
-            allViewButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const dashboardUrl = button.getAttribute('data-url');
-                    
-                    dashboardView.innerHTML = ''; 
-                    const iframe = document.createElement('iframe');
-                    iframe.src = dashboardUrl;
-                    iframe.className = 'dashboard-iframe';
-                    iframe.setAttribute('allowfullscreen', '');
-                    dashboardView.appendChild(iframe);
-                    
-                    selectionScreen.style.display = 'none';
-                    dashboardView.style.display = 'flex';
-                    isViewingDashboard = true;
-                    updateBackButton();
-                });
-            });
+        function handleRadioChange() {
+            // Primeiro, reseta o estado de todas as visualizações
+            resetViews();
             
-            function updateBackButton() {
-                if (isViewingDashboard) {
-                    backButton.textContent = '← Voltar';
-                    backButton.href = '#'; 
-                } else {
-                    backButton.textContent = '← Voltar ao Hub';
-                    backButton.href = '/';
-                }
+            const selectedSystem = document.querySelector('input[name="dashboard_system"]:checked').value;
+            if (selectedSystem === 'looker') {
+                lookerOptions.classList.remove('hidden');
+                tableauOptions.classList.add('hidden');
+            } else {
+                lookerOptions.classList.add('hidden');
+                tableauOptions.classList.remove('hidden');
             }
+        }
+        radios.forEach(radio => radio.addEventListener('change', handleRadioChange));
 
-            backButton.addEventListener('click', (event) => {
-                if (isViewingDashboard) {
-                    event.preventDefault(); 
-                    dashboardView.innerHTML = '';
-                    dashboardView.style.display = 'none';
-                    selectionScreen.style.display = 'flex';
-                    isViewingDashboard = false;
-                    updateBackButton();
-                }
-            });
-
-            // Script do componente de feedback
-            const fab = document.getElementById('feedback-fab');
-            const popup = document.getElementById('feedback-popup');
-            const closeBtn = document.getElementById('modal-close-btn');
-            const optionButtons = document.querySelectorAll('.option-button');
-            const modalOptions = document.getElementById('modal-options');
-            const iframeContainer = document.getElementById('iframe-container');
-            const feedbackIframe = iframeContainer.querySelector('iframe');
-            const modalTitle = document.getElementById('modal-title');
-
-            const forms = {
-                demanda: { title: "Solicitação de Demanda", url: "https://docs.google.com/forms/d/e/1FAIpQLSdBvCg6jU3XjXn-dFLfwRZU-fj80fMbAT1vv6J6hg9yUIH1Jg/viewform?embedded=true" },
-                sugestao: { title: "Sugestões de Melhoria", url: "https://docs.google.com/forms/d/e/1FAIpQLScIp_mkk0kMZuJgjchiq5O2fHGTkPSjXYpsi4G5Xw2e297C6w/viewform?embedded=true" }
-            };
-
-            const togglePopup = () => {
-                modalOptions.style.display = 'flex';
-                iframeContainer.style.display = 'none';
-                modalTitle.textContent = "FAQ";
-                popup.classList.toggle('visible');
-            };
-
-            fab.addEventListener('click', togglePopup);
-            closeBtn.addEventListener('click', togglePopup);
-            
-            popup.addEventListener('click', (e) => {
-                 if (e.target === popup) {
-                    togglePopup();
-                 }
-            });
-
-            optionButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const formType = button.getAttribute('data-form');
-                    const formData = forms[formType];
-                    modalTitle.textContent = formData.title;
-                    feedbackIframe.src = formData.url;
-                    modalOptions.style.display = 'none';
-                    iframeContainer.style.display = 'block';
-                });
+        // --- LÓGICA PARA EXIBIR O DASHBOARD NO IFRAME (Sem alterações) ---
+        allViewButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const dashboardUrl = button.getAttribute('data-url');
+                dashboardView.innerHTML = ''; 
+                const iframe = document.createElement('iframe');
+                iframe.src = dashboardUrl;
+                iframe.className = 'dashboard-iframe';
+                iframe.setAttribute('allowfullscreen', '');
+                dashboardView.appendChild(iframe);
+                selectionScreen.style.display = 'none';
+                dashboardView.style.display = 'flex';
+                isViewingDashboard = true;
+                updateBackButton();
             });
         });
-    </script>
+        
+        // --- LÓGICA DO BOTÃO DE VOLTAR PRINCIPAL (Sem alterações) ---
+        function updateBackButton() {
+            if (isViewingDashboard) {
+                backButton.textContent = '← Voltar';
+                backButton.href = '#'; 
+            } else {
+                backButton.textContent = '← Voltar ao Hub';
+                backButton.href = '/';
+            }
+        }
+
+        backButton.addEventListener('click', (event) => {
+            if (isViewingDashboard) {
+                event.preventDefault(); 
+                dashboardView.innerHTML = '';
+                dashboardView.style.display = 'none';
+                selectionScreen.style.display = 'flex';
+                isViewingDashboard = false;
+                updateBackButton();
+            }
+        });
+
+        // --- LÓGICA PARA NAVEGAÇÃO ENTRE ÁREAS E DASHBOARDS (CORRIGIDA) ---
+        allAreaButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const area = button.dataset.area;
+                const targetDashboardGroup = document.getElementById(`dashboards-${area}`);
+                
+                // Encontra o container de áreas pai deste botão e o esconde
+                const parentAreaContainer = button.closest('.area-selection-container');
+                if (parentAreaContainer) {
+                    parentAreaContainer.classList.add('hidden');
+                }
+
+                if (targetDashboardGroup) {
+                    targetDashboardGroup.classList.remove('hidden');
+                }
+            });
+        });
+
+        allBackToAreasButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const parentDashboardGroup = button.parentElement;
+                
+                // Encontra o container de sistema (Looker ou Tableau) pai de tudo
+                const mainContainer = button.closest('#looker-options, #tableau-options');
+                
+                // Esconde o grupo de dashboards atual
+                parentDashboardGroup.classList.add('hidden');
+                
+                // Mostra o menu de seleção de áreas dentro do container principal
+                if (mainContainer) {
+                    mainContainer.querySelector('.area-selection-container').classList.remove('hidden');
+                }
+            });
+        });
+
+        // --- SCRIPT DO COMPONENTE DE FEEDBACK (Sem alterações) ---
+        const fab = document.getElementById('feedback-fab');
+        // ... (o resto do seu script de feedback continua aqui igual) ...
+        const popup = document.getElementById('feedback-popup');
+        const closeBtn = document.getElementById('modal-close-btn');
+        const optionButtons = document.querySelectorAll('.option-button');
+        const modalOptions = document.getElementById('modal-options');
+        const iframeContainer = document.getElementById('iframe-container');
+        const feedbackIframe = iframeContainer.querySelector('iframe');
+        const modalTitle = document.getElementById('modal-title');
+
+        const forms = {
+            demanda: { title: "Solicitação de Demanda", url: "https://docs.google.com/forms/d/e/1FAIpQLSdBvCg6jU3XjXn-dFLfwRZU-fj80fMbAT1vv6J6hg9yUIH1Jg/viewform?embedded=true" },
+            sugestao: { title: "Sugestões de Melhoria", url: "https://docs.google.com/forms/d/e/1FAIpQLScIp_mkk0kMZuJgjchiq5O2fHGTkPSjXYpsi4G5Xw2e297C6w/viewform?embedded=true" }
+        };
+
+        const togglePopup = () => {
+            modalOptions.style.display = 'flex';
+            iframeContainer.style.display = 'none';
+            modalTitle.textContent = "FAQ";
+            popup.classList.toggle('visible');
+        };
+
+        fab.addEventListener('click', togglePopup);
+        closeBtn.addEventListener('click', togglePopup);
+        
+        popup.addEventListener('click', (e) => {
+             if (e.target === popup) {
+                togglePopup();
+             }
+        });
+
+        optionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const formType = button.getAttribute('data-form');
+                const formData = forms[formType];
+                modalTitle.textContent = formData.title;
+                feedbackIframe.src = formData.url;
+                modalOptions.style.display = 'none';
+                iframeContainer.style.display = 'block';
+            });
+        });
+    });
+</script>
 </body>
 </html>
