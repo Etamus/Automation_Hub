@@ -1,55 +1,126 @@
-// Este script controla o componente de feedback (botão flutuante e pop-up)
-
+// Este script controla o componente de chatbot de feedback com análise de palavras-chave
 document.addEventListener('DOMContentLoaded', () => {
     const fab = document.getElementById('feedback-fab');
     const popup = document.getElementById('feedback-popup');
-    // Verifica se os elementos existem na página antes de adicionar os listeners
     if (!fab || !popup) return;
 
     const closeBtn = document.getElementById('modal-close-btn');
-    const optionButtons = document.querySelectorAll('.option-button');
-    const modalOptions = document.getElementById('modal-options');
+    const chatMessages = document.getElementById('chat-messages');
     const iframeContainer = document.getElementById('iframe-container');
     const iframe = iframeContainer.querySelector('iframe');
     const modalTitle = document.getElementById('modal-title');
+    const chatInputArea = document.getElementById('chat-input-area');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
 
     const forms = {
         demanda: { title: "Solicitação de Demanda", url: "https://docs.google.com/forms/d/e/1FAIpQLSdBvCg6jU3XjXn-dFLfwRZU-fj80fMbAT1vv6J6hg9yUIH1Jg/viewform?embedded=true" },
         sugestao: { title: "Sugestões de Melhoria", url: "https://docs.google.com/forms/d/e/1FAIpQLScIp_mkk0kMZuJgjchiq5O2fHGTkPSjXYpsi4G5Xw2e297C6w/viewform?embedded=true" }
     };
 
-    const togglePopup = () => {
-        // Reseta para a tela de opções sempre que abrir/fechar
-        modalOptions.style.display = 'flex';
-        iframeContainer.style.display = 'none';
-        modalTitle.textContent = "FAQ";
-        popup.classList.toggle('visible');
+    const keywords = {
+        demanda: ['solicitar', 'demanda', 'automação', 'automatizar', 'robô', 'processo', 'tarefa', 'criar', 'quero', 'preciso', 'gostaria'],
+        sugestao: ['sugestão', 'feedback', 'ideia', 'melhoria', 'mudar', 'ajustar', 'sugiro', 'poderia', 'poderiam']
     };
 
-    fab.addEventListener('click', togglePopup);
-    closeBtn.addEventListener('click', togglePopup);
+    const addMessage = (text, type) => {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${type}`;
+        messageDiv.textContent = text;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
 
-    // Adiciona um listener para fechar o popup se clicar fora dele
-    // Usamos um overlay separado para isso (adicionado no HTML)
-    const overlay = document.getElementById('feedback-modal-overlay');
-    if (overlay) {
-        overlay.addEventListener('click', (e) => {
-            // Garante que o clique foi no overlay e não no conteúdo do popup
-            if (e.target === overlay) {
-                popup.classList.remove('visible');
+    const showForm = (formType) => {
+        const formData = forms[formType];
+        modalTitle.textContent = formData.title;
+        iframe.src = formData.url;
+        chatMessages.style.display = 'none';
+        chatInputArea.style.display = 'none';
+        iframeContainer.style.display = 'block';
+    };
+
+    const resetChat = () => {
+        popup.classList.remove('visible');
+        setTimeout(() => {
+            chatMessages.innerHTML = '';
+            chatMessages.style.display = 'flex';
+            chatInputArea.style.display = 'flex';
+            chatInput.disabled = false;
+            sendBtn.disabled = false;
+            iframeContainer.style.display = 'none';
+            iframe.src = 'about:blank';
+            modalTitle.textContent = 'Assistente Virtual';
+        }, 300);
+    };
+    
+    const startConversation = () => {
+        addMessage("Olá! Sou o assistente virtual.", 'bot-message');
+        setTimeout(() => {
+            addMessage("Por gentileza, descreva em poucas palavras o que deseja.", 'bot-message');
+        }, 1200);
+    };
+
+    const toggleChat = () => {
+        const isVisible = popup.classList.contains('visible');
+        if (isVisible) {
+            resetChat();
+        } else {
+            popup.classList.add('visible');
+            if (chatMessages.children.length === 0) {
+                startConversation();
             }
-        });
-    }
+        }
+    };
+    
+    const processUserInput = (userInput) => {
+        const text = userInput.toLowerCase();
+        
+        const isDemanda = keywords.demanda.some(keyword => text.includes(keyword));
+        const isSugestao = keywords.sugestao.some(keyword => text.includes(keyword));
 
+        if (isDemanda && isSugestao) {
+             addMessage("Não entendi muito bem. Sua mensagem parece ser tanto uma demanda quanto uma sugestão. Poderia esclarecer?", 'bot-message');
+             chatInput.disabled = false;
+             sendBtn.disabled = false;
+        } else if (isDemanda) {
+            // --- TEXTO ALTERADO ---
+            addMessage("Para demandas, siga esse formulário:", 'bot-message');
+            // --- TEMPO AUMENTADO ---
+            setTimeout(() => showForm('demanda'), 2000);
+        } else if (isSugestao) {
+            // --- TEXTO ALTERADO ---
+            addMessage("Para sugestões, siga esse formulário:", 'bot-message');
+            // --- TEMPO AUMENTADO ---
+            setTimeout(() => showForm('sugestao'), 2000);
+        } else { 
+            // --- TEXTO ALTERADO ---
+            addMessage("Desculpe, não consegui identificar sua necessidade. Por favor, escreva novamente o que deseja em poucas palavras.", 'bot-message');
+            chatInput.disabled = false;
+            sendBtn.disabled = false;
+        }
+    };
 
-    optionButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const formType = button.getAttribute('data-form');
-            const formData = forms[formType];
-            modalTitle.textContent = formData.title;
-            iframe.src = formData.url;
-            modalOptions.style.display = 'none';
-            iframeContainer.style.display = 'block';
-        });
+    const handleUserInput = () => {
+        const userInput = chatInput.value.trim();
+        if (!userInput) return;
+
+        addMessage(userInput, 'user-reply');
+        chatInput.value = '';
+        chatInput.disabled = true;
+        sendBtn.disabled = true;
+
+        setTimeout(() => {
+            processUserInput(userInput);
+        }, 1000);
+    };
+
+    fab.addEventListener('click', toggleChat);
+    closeBtn.addEventListener('click', resetChat);
+    sendBtn.addEventListener('click', handleUserInput);
+    chatInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            handleUserInput();
+        }
     });
 });
