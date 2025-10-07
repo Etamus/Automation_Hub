@@ -55,7 +55,6 @@
             background-color: #007bff;
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.2s ease;
-            /* --- LARGURA REDUZIDA AINDA MAIS --- */
             width: 50%;
             max-width: 300px;
         }
@@ -67,40 +66,40 @@
             display: none !important;
         }
         .area-button {
-    padding: 15px 20px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    background-color: #28a745; /* Cor verde para diferenciar */
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    width: 50%;
-    max-width: 300px;
-}
-.area-button:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-}
-.back-to-areas-button {
-    padding: 10px 15px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    color: #212529;
-    background-color: #f8f9fa; /* Cor clara para ser discreto */
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    width: 50%;
-    max-width: 300px;
-    margin-top: 15px; /* Espaçamento para separar dos outros botões */
-    border: 1px solid #dee2e6;
-}
-.back-to-areas-button:hover {
-    background-color: #e2e6ea;
-}
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            background-color: #28a745;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            width: 50%;
+            max-width: 300px;
+        }
+        .area-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .back-to-areas-button {
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            color: #212529;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 50%;
+            max-width: 300px;
+            margin-top: 15px;
+            border: 1px solid #dee2e6;
+        }
+        .back-to-areas-button:hover {
+            background-color: #e2e6ea;
+        }
     </style>
 </head>
 <body>
@@ -117,127 +116,110 @@
         </div>
         
         <div id="looker-options" class="dashboard-options">
-
-    <div id="area-selection" class="dashboard-options area-selection-container">
-        <button class="area-button" data-area="order">Order</button>
-        <button class="area-button" data-area="recebimento">Recebimento</button>
-        <button class="area-button" data-area="inventario">Inventário</button>
-        <button class="area-button" data-area="faturamento">Faturamento</button>
-        <button class="area-button" data-area="reversa">Reversa</button>
-        <button class="area-button" data-area="custos">Custos</button>
-        <button class="area-button" data-area="safety">Safety</button>
-    </div>
-
-    <div id="dashboards-order" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://lookerstudio.google.com/u/0/reporting/4b061ef2-9ddf-4120-b3e1-aaa692bd10c3/page/p_lvyh6guavd?s=g2UtuRWsgLg">Daily Block</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-    <div id="dashboards-recebimento" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://lookerstudio.google.com/u/0/reporting/021f1eef-b3b6-4d5d-b67e-429e49e84398">Receipt management</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-    <div id="dashboards-inventario" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/2d1dde98-6bc5-476c-937a-0b09d78e04e6/page/8NWNF">Stock Control</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-    <div id="dashboards-reversa" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/83d4b36a-da22-4712-8199-abe2f436df52/page/cCPMF">Returns Control</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-    <div id="dashboards-faturamento" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/u/0/reporting/5b61e471-c338-4887-bd57-fe1f4a28fffb/page/p_8m74juigsd">Boletim de faturamento (D2C)</button>
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/u/0/reporting/29875f95-7c9c-447c-9d7a-6076f1f4d966/page/6CGCE">Gestão de transporte (B2B)</button>
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/cc6a31a8-aa2a-49af-982f-7c7d170103be/page/p_az16g8cxtd">New Calendar</button>
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/4589a8ca-81a5-4233-915e-0d1c00fdda20/page/p_0zwhymauid">Visão Gerencial Peças</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-    <div id="dashboards-custos" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/51b05d28-dee8-4577-aa5e-2d86eaba9f62/page/W3haF">SLA Monthly CSI</button>
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/818af536-436e-48a3-a441-049036815083/page/GTEPF">Projects</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-    <div id="dashboards-safety" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/ec62c048-7747-4f1d-917e-1a99a76fc58d/page/y4haF">Heinrich triangle</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-</div>
+            <div id="area-selection" class="dashboard-options area-selection-container">
+                <button class="area-button" data-area="order">Order</button>
+                <button class="area-button" data-area="recebimento">Recebimento</button>
+                <button class="area-button" data-area="inventario">Inventário</button>
+                <button class="area-button" data-area="faturamento">Faturamento</button>
+                <button class="area-button" data-area="reversa">Reversa</button>
+                <button class="area-button" data-area="custos">Custos</button>
+                <button class="area-button" data-area="safety">Safety</button>
+            </div>
+            <div id="dashboards-order" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://lookerstudio.google.com/u/0/reporting/4b061ef2-9ddf-4120-b3e1-aaa692bd10c3/page/p_lvyh6guavd?s=g2UtuRWsgLg">Daily Block</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+            <div id="dashboards-recebimento" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://lookerstudio.google.com/u/0/reporting/021f1eef-b3b6-4d5d-b67e-429e49e84398">Receipt management</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+            <div id="dashboards-inventario" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/2d1dde98-6bc5-476c-937a-0b09d78e04e6/page/8NWNF">Stock Control</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+            <div id="dashboards-reversa" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/83d4b36a-da22-4712-8199-abe2f436df52/page/cCPMF">Returns Control</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+            <div id="dashboards-faturamento" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/u/0/reporting/5b61e471-c338-4887-bd57-fe1f4a28fffb/page/p_8m74juigsd">Boletim de faturamento (D2C)</button>
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/u/0/reporting/29875f95-7c9c-447c-9d7a-6076f1f4d966/page/6CGCE">Gestão de transporte (B2B)</button>
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/cc6a31a8-aa2a-49af-982f-7c7d170103be/page/p_az16g8cxtd">New Calendar</button>
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/4589a8ca-81a5-4233-915e-0d1c00fdda20/page/p_0zwhymauid">Visão Gerencial Peças</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+            <div id="dashboards-custos" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/51b05d28-dee8-4577-aa5e-2d86eaba9f62/page/W3haF">SLA Monthly CSI</button>
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/818af536-436e-48a3-a441-049036815083/page/GTEPF">Projects</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+            <div id="dashboards-safety" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://lookerstudio.google.com/embed/reporting/ec62c048-7747-4f1d-917e-1a99a76fc58d/page/y4haF">Heinrich triangle</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+        </div>
         
         <div id="tableau-options" class="dashboard-options hidden">
-
-    <div id="tableau-area-selection" class="dashboard-options area-selection-container">
-        <button class="area-button" data-area="tableau-custos">Custos</button>
-        <button class="area-button" data-area="tableau-monitoramento">Monitoramento</button>
-    </div>
-
-    <div id="dashboards-tableau-custos" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://public.tableau.com/views/Navedofretev1_2/Freight_Vision?:embed=y&:display_count=yes&:showVizHome=no">Nave do Frete</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-    <div id="dashboards-tableau-monitoramento" class="dashboard-options hidden">
-        <button class="view-button" data-url="https://lartableau.whirlpool.com/#/views/NFOnTime/ONTIME?:iid=1">ON TIME</button>
-        <button class="back-to-areas-button">← Voltar para Áreas</button>
-    </div>
-
-</div>
+            <div id="tableau-area-selection" class="dashboard-options area-selection-container">
+                <button class="area-button" data-area="tableau-custos">Custos</button>
+                <button class="area-button" data-area="tableau-monitoramento">Monitoramento</button>
+            </div>
+            <div id="dashboards-tableau-custos" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://public.tableau.com/views/Navedofretev1_2/Freight_Vision?:embed=y&:display_count=yes&:showVizHome=no">Nave do Frete</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+            <div id="dashboards-tableau-monitoramento" class="dashboard-options hidden">
+                <button class="view-button" data-url="https://lartableau.whirlpool.com/#/views/NFOnTime/ONTIME?:iid=1">ON TIME</button>
+                <button class="back-to-areas-button">← Voltar para Áreas</button>
+            </div>
+        </div>
     </div>
 
     <div id="dashboard-view" class="dashboard-container"></div>
     
-    <div class="fab" id="feedback-fab" title="Feedback e Demandas"> <i class="fas fa-comment-dots"></i> </div>
-    <div class="feedback-popup" id="feedback-popup">
-        <div class="modal-header">
-            <h2 id="modal-title">FAQ</h2>
+    <div class="fab" id="feedback-fab" title="Feedback e Demandas">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    <div class="chat-popup" id="feedback-popup">
+        <div class="chat-header">
+            <h2 id="modal-title">Assistente Virtual</h2>
             <button class="close-button" id="modal-close-btn">&times;</button>
         </div>
-        <div class="modal-options" id="modal-options">
-            <button class="option-button" data-form="demanda">Deseja solicitar alguma demanda?</button>
-            <button class="option-button" data-form="sugestao">Tem alguma sugestão?</button>
+        <div class="chat-messages" id="chat-messages">
+            </div>
+        <div class="iframe-container" id="iframe-container">
+            <iframe src="about:blank" frameborder="0"></iframe>
         </div>
-        <div class="iframe-container" id="iframe-container"> <iframe src="" frameborder="0"></iframe> </div>
+        <div class="chat-input-area" id="chat-input-area">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Descreva o que precisa...">
+            <button class="send-button" id="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
     </div>
     
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- CONSTANTES GLOBAIS DA PÁGINA ---
+        // --- LÓGICA PRINCIPAL DA PÁGINA DE DASHBOARDS (sem alterações) ---
         const selectionScreen = document.getElementById('selection-screen');
         const dashboardView = document.getElementById('dashboard-view');
         const radios = document.querySelectorAll('input[name="dashboard_system"]');
         const backButton = document.getElementById('back-btn');
         let isViewingDashboard = false;
 
-        // --- CONSTANTES PARA A SELEÇÃO DE SISTEMA (LOOKER/TABLEAU) ---
+        const allViewButtons = document.querySelectorAll('.view-button');
         const lookerOptions = document.getElementById('looker-options');
         const tableauOptions = document.getElementById('tableau-options');
-        
-        // --- CONSTANTES PARA A NAVEGAÇÃO POR ÁREAS ---
         const allAreaContainers = document.querySelectorAll('.area-selection-container');
         const allAreaButtons = document.querySelectorAll('.area-button');
         const allDashboardGroups = document.querySelectorAll('.dashboard-options[id^="dashboards-"]');
         const allBackToAreasButtons = document.querySelectorAll('.back-to-areas-button');
-        
-        // --- CONSTANTE PARA OS BOTÕES DE DASHBOARD FINAIS ---
-        const allViewButtons = document.querySelectorAll('.view-button');
 
-        // --- LÓGICA PARA ALTERNAR ENTRE LOOKER E TABLEAU (CORRIGIDA) ---
         function resetViews() {
-            // Esconde todos os grupos de dashboards específicos
             allDashboardGroups.forEach(group => group.classList.add('hidden'));
-            // Mostra todos os menus de seleção de área
             allAreaContainers.forEach(container => container.classList.remove('hidden'));
         }
 
         function handleRadioChange() {
-            // Primeiro, reseta o estado de todas as visualizações
             resetViews();
-            
             const selectedSystem = document.querySelector('input[name="dashboard_system"]:checked').value;
             if (selectedSystem === 'looker') {
                 lookerOptions.classList.remove('hidden');
@@ -249,7 +231,6 @@
         }
         radios.forEach(radio => radio.addEventListener('change', handleRadioChange));
 
-        // --- LÓGICA PARA EXIBIR O DASHBOARD NO IFRAME (Sem alterações) ---
         allViewButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const dashboardUrl = button.getAttribute('data-url');
@@ -266,7 +247,6 @@
             });
         });
         
-        // --- LÓGICA DO BOTÃO DE VOLTAR PRINCIPAL (Sem alterações) ---
         function updateBackButton() {
             if (isViewingDashboard) {
                 backButton.textContent = '← Voltar';
@@ -288,18 +268,14 @@
             }
         });
 
-        // --- LÓGICA PARA NAVEGAÇÃO ENTRE ÁREAS E DASHBOARDS (CORRIGIDA) ---
         allAreaButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const area = button.dataset.area;
                 const targetDashboardGroup = document.getElementById(`dashboards-${area}`);
-                
-                // Encontra o container de áreas pai deste botão e o esconde
                 const parentAreaContainer = button.closest('.area-selection-container');
                 if (parentAreaContainer) {
                     parentAreaContainer.classList.add('hidden');
                 }
-
                 if (targetDashboardGroup) {
                     targetDashboardGroup.classList.remove('hidden');
                 }
@@ -309,61 +285,117 @@
         allBackToAreasButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const parentDashboardGroup = button.parentElement;
-                
-                // Encontra o container de sistema (Looker ou Tableau) pai de tudo
                 const mainContainer = button.closest('#looker-options, #tableau-options');
-                
-                // Esconde o grupo de dashboards atual
                 parentDashboardGroup.classList.add('hidden');
-                
-                // Mostra o menu de seleção de áreas dentro do container principal
                 if (mainContainer) {
                     mainContainer.querySelector('.area-selection-container').classList.remove('hidden');
                 }
             });
         });
 
-        // --- SCRIPT DO COMPONENTE DE FEEDBACK (Sem alterações) ---
+        // --- SCRIPT DO CHATBOT (RESTAURADO E CORRIGIDO) ---
         const fab = document.getElementById('feedback-fab');
-        // ... (o resto do seu script de feedback continua aqui igual) ...
         const popup = document.getElementById('feedback-popup');
         const closeBtn = document.getElementById('modal-close-btn');
-        const optionButtons = document.querySelectorAll('.option-button');
-        const modalOptions = document.getElementById('modal-options');
+        const chatMessages = document.getElementById('chat-messages');
         const iframeContainer = document.getElementById('iframe-container');
-        const feedbackIframe = iframeContainer.querySelector('iframe');
+        const iframe = iframeContainer.querySelector('iframe');
         const modalTitle = document.getElementById('modal-title');
+        const chatInputArea = document.getElementById('chat-input-area');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
 
         const forms = {
             demanda: { title: "Solicitação de Demanda", url: "https://docs.google.com/forms/d/e/1FAIpQLSdBvCg6jU3XjXn-dFLfwRZU-fj80fMbAT1vv6J6hg9yUIH1Jg/viewform?embedded=true" },
             sugestao: { title: "Sugestões de Melhoria", url: "https://docs.google.com/forms/d/e/1FAIpQLScIp_mkk0kMZuJgjchiq5O2fHGTkPSjXYpsi4G5Xw2e297C6w/viewform?embedded=true" }
         };
-
-        const togglePopup = () => {
-            modalOptions.style.display = 'flex';
-            iframeContainer.style.display = 'none';
-            modalTitle.textContent = "FAQ";
-            popup.classList.toggle('visible');
+        const keywords = {
+            demanda: ['solicitar', 'demanda', 'automação', 'automatizar', 'robô', 'processo', 'tarefa', 'criar', 'quero', 'preciso', 'gostaria'],
+            sugestao: ['sugestão', 'feedback', 'ideia', 'melhoria', 'mudar', 'ajustar', 'sugiro', 'poderia', 'poderiam']
         };
-
-        fab.addEventListener('click', togglePopup);
-        closeBtn.addEventListener('click', togglePopup);
-        
-        popup.addEventListener('click', (e) => {
-             if (e.target === popup) {
-                togglePopup();
-             }
-        });
-
-        optionButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const formType = button.getAttribute('data-form');
-                const formData = forms[formType];
-                modalTitle.textContent = formData.title;
-                feedbackIframe.src = formData.url;
-                modalOptions.style.display = 'none';
-                iframeContainer.style.display = 'block';
-            });
+        const addMessage = (text, type) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${type}`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+        const showForm = (formType) => {
+            const formData = forms[formType];
+            modalTitle.textContent = formData.title;
+            iframe.src = formData.url;
+            chatMessages.style.display = 'none';
+            chatInputArea.style.display = 'none';
+            iframeContainer.style.display = 'block';
+        };
+        const resetChat = () => {
+            popup.classList.remove('visible');
+            setTimeout(() => {
+                chatMessages.innerHTML = '';
+                chatMessages.style.display = 'flex';
+                chatInputArea.style.display = 'flex';
+                chatInput.disabled = false;
+                sendBtn.disabled = false;
+                iframeContainer.style.display = 'none';
+                iframe.src = 'about:blank';
+                modalTitle.textContent = 'Assistente Virtual';
+            }, 300);
+        };
+        const startConversation = () => {
+            addMessage("Olá! Sou o assistente virtual.", 'bot-message');
+            setTimeout(() => {
+                addMessage("Por gentileza, descreva em poucas palavras o que deseja.", 'bot-message');
+            }, 1200);
+        };
+        const toggleChat = () => {
+            const isVisible = popup.classList.contains('visible');
+            if (isVisible) {
+                resetChat();
+            } else {
+                popup.classList.add('visible');
+                if (chatMessages.children.length === 0) {
+                    startConversation();
+                }
+            }
+        };
+        const processUserInput = (userInput) => {
+            const text = userInput.toLowerCase();
+            const isDemanda = keywords.demanda.some(keyword => text.includes(keyword));
+            const isSugestao = keywords.sugestao.some(keyword => text.includes(keyword));
+            if (isDemanda && isSugestao) {
+                addMessage("Não entendi muito bem. Sua mensagem parece ser tanto uma demanda quanto uma sugestão. Poderia esclarecer?", 'bot-message');
+                chatInput.disabled = false;
+                sendBtn.disabled = false;
+            } else if (isDemanda) {
+                addMessage("Para demandas, siga esse formulário:", 'bot-message');
+                setTimeout(() => showForm('demanda'), 2000);
+            } else if (isSugestao) {
+                addMessage("Para sugestões, siga esse formulário:", 'bot-message');
+                setTimeout(() => showForm('sugestao'), 2000);
+            } else { 
+                addMessage("Desculpe, não consegui identificar sua necessidade. Por favor, escreva novamente o que deseja em poucas palavras.", 'bot-message');
+                chatInput.disabled = false;
+                sendBtn.disabled = false;
+            }
+        };
+        const handleUserInput = () => {
+            const userInput = chatInput.value.trim();
+            if (!userInput) return;
+            addMessage(userInput, 'user-reply');
+            chatInput.value = '';
+            chatInput.disabled = true;
+            sendBtn.disabled = true;
+            setTimeout(() => {
+                processUserInput(userInput);
+            }, 1000);
+        };
+        fab.addEventListener('click', toggleChat);
+        closeBtn.addEventListener('click', resetChat);
+        sendBtn.addEventListener('click', handleUserInput);
+        chatInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                handleUserInput();
+            }
         });
     });
 </script>
