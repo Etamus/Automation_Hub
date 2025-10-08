@@ -4,7 +4,8 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 
 ---
 
-<img width="1912" height="925" alt="{8031914B-9BFA-4310-A921-A798F908F74C}" src="https://github.com/user-attachments/assets/7e0e877d-5630-4520-ac09-0172230a6e40" />
+<img width="1917" height="894" alt="{25A22C65-5931-4CFF-B5E1-55881DFB428A}" src="https://github.com/user-attachments/assets/b3ae7b78-0760-4cdf-89bb-e67c3a5e4fce" />
+
 
 ---
 
@@ -81,4 +82,5 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 - Python + Flask → Backend e servidor local  
 - Playwright → Automação de navegador  
 - PowerShell → Scripts de integração no Windows  
+
 - HTML/CSS/JS → Interface web  
