@@ -27,17 +27,17 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 
 ---
 
-## ⚙️ Como Executar
+## Como Executar
 
-### ✅ Pré-requisitos
+### Pré-requisitos
 - Python 3.x  
 - Navegador moderno (Chrome, Edge, etc.)  
 - Ambiente Windows (necessário para os scripts PowerShell e automação de macros)
 
-### 💾 Instalação
+### Instalação
 1. Clone o repositório ou baixe os arquivos:  
-   git clone https://github.com/Etamus/Portal_Automation.git  
-   cd Portal_Automation  
+   git clone https://github.com/Etamus/Hub_Spare_Parts.git  
+   cd Hub_Spare_Parts
 
 2. Crie um arquivo chamado requirements.txt na pasta principal e adicione:  
    Flask  
@@ -48,7 +48,7 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 
 ---
 
-## ▶️ Execução
+## Execução
 
 1. Inicie o servidor Flask:  
    python servidor_unico.py  
@@ -61,7 +61,7 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 
 ---
 
-## 🧹 Scripts Importantes
+## Scripts Importantes
 
 | Script | Função |
 |--------|--------|
@@ -73,10 +73,11 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 
 ---
 
-## 🧩 Tecnologias
+## Tecnologias
 
 - Python + Flask → Backend e servidor local  
 - Playwright → Automação de navegador  
 - PowerShell → Scripts de integração no Windows  
 - HTML/CSS/JS → Interface web  
+
 
