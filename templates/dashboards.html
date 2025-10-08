@@ -28,8 +28,8 @@
         }
         .dashboard-container { width: 95vw; height: 85vh; display: none; flex-direction: column; }
         .dashboard-iframe { width: 100%; height: 100%; border: none; border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
-        .back-button { position: absolute; top: 20px; left: 20px; z-index: 10; padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.2s ease; }
-        .back-button:hover { background-color: #5a6268; transform: translateY(-2px); }
+        .back-button { position: absolute; top: 20px; left: 20px; z-index: 10; padding: 10px 20px; background-color: #333; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 14px; border: 1px solid #444; transition: all 0.2s ease; }
+        .back-button:hover { background-color: #444; transform: translateY(-2px); }
         #selection-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; text-align: center; max-width: 550px; }
         .system-selector { display: flex; justify-content: center; align-items: center; gap: 40px; margin-bottom: 30px; border-bottom: 1px solid #dee2e6; padding-bottom: 30px; width: 100%; max-width: 500px; }
         .system-selector label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
@@ -37,69 +37,14 @@
         .system-selector input[type="radio"]::before { content: ""; width: 0.65em; height: 0.65em; border-radius: 50%; transform: scale(0); transition: 120ms transform ease-in-out; box-shadow: inset 1em 1em #007bff; }
         .system-selector input[type="radio"]:checked::before { transform: scale(1); }
         .system-selector img { height: 30px; }
-        
-        .dashboard-options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            align-items: center;
-        }
-        .view-button {
-            padding: 15px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            background-color: #007bff;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            width: 50%;
-            max-width: 300px;
-        }
-        .view-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-        }
-        .hidden {
-            display: none !important;
-        }
-        .area-button {
-            padding: 15px 20px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            background-color: #28a745;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            width: 50%;
-            max-width: 300px;
-        }
-        .area-button:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
-        }
-        .back-to-areas-button {
-            padding: 10px 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            color: #212529;
-            background-color: #f8f9fa;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            width: 50%;
-            max-width: 300px;
-            margin-top: 15px;
-            border: 1px solid #dee2e6;
-        }
-        .back-to-areas-button:hover {
-            background-color: #e2e6ea;
-        }
+        .dashboard-options { display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: center; }
+        .view-button { padding: 15px 20px; font-size: 1rem; font-weight: 600; border: none; border-radius: 8px; color: white; background-color: #007bff; cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease; width: 50%; max-width: 300px; }
+        .view-button:hover { background-color: #0056b3; transform: translateY(-2px); }
+        .hidden { display: none !important; }
+        .area-button { padding: 15px 20px; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 8px; color: white; background-color: #28a745; cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease; width: 50%; max-width: 300px; }
+        .area-button:hover { background-color: #218838; transform: translateY(-2px); }
+        .back-to-areas-button { padding: 10px 15px; font-size: 0.9rem; font-weight: 600; border: none; border-radius: 8px; color: #212529; background-color: #f8f9fa; cursor: pointer; transition: background-color 0.2s ease; width: 50%; max-width: 300px; margin-top: 15px; border: 1px solid #dee2e6; }
+        .back-to-areas-button:hover { background-color: #e2e6ea; }
     </style>
 </head>
 <body>
@@ -185,8 +130,7 @@
             <h2 id="modal-title">Assistente Virtual</h2>
             <button class="close-button" id="modal-close-btn">&times;</button>
         </div>
-        <div class="chat-messages" id="chat-messages">
-            </div>
+        <div class="chat-messages" id="chat-messages"></div>
         <div class="iframe-container" id="iframe-container">
             <iframe src="about:blank" frameborder="0"></iframe>
         </div>
@@ -198,13 +142,12 @@
     
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- LÓGICA PRINCIPAL DA PÁGINA DE DASHBOARDS (sem alterações) ---
+        // --- LÓGICA PRINCIPAL DA PÁGINA DE DASHBOARDS ---
         const selectionScreen = document.getElementById('selection-screen');
         const dashboardView = document.getElementById('dashboard-view');
         const radios = document.querySelectorAll('input[name="dashboard_system"]');
         const backButton = document.getElementById('back-btn');
         let isViewingDashboard = false;
-
         const allViewButtons = document.querySelectorAll('.view-button');
         const lookerOptions = document.getElementById('looker-options');
         const tableauOptions = document.getElementById('tableau-options');
@@ -293,7 +236,7 @@
             });
         });
 
-        // --- SCRIPT DO CHATBOT (RESTAURADO E CORRIGIDO) ---
+        // --- SCRIPT DO CHATBOT ---
         const fab = document.getElementById('feedback-fab');
         const popup = document.getElementById('feedback-popup');
         const closeBtn = document.getElementById('modal-close-btn');
