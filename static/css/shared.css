@@ -1,4 +1,6 @@
 /* --- Estilos para o Botão Flutuante (FAB) e o Chatbot Pop-up --- */
+
+/* O Botão Flutuante */
 .fab {
     position: fixed;
     bottom: 30px;
@@ -22,7 +24,7 @@
     background-color: #0056b3;
 }
 
-/* A Janela do Chatbot */
+/* A "caixinha" Pop-up do Chatbot */
 .chat-popup {
     position: fixed;
     bottom: 100px;
@@ -49,7 +51,6 @@
     visibility: visible;
     transform: translateY(0);
 }
-
 .chat-popup::after {
     content: '';
     position: absolute;
@@ -83,13 +84,12 @@
     flex-direction: column;
     gap: 15px;
 }
-
 .chat-message {
     padding: 10px 15px;
     border-radius: 18px;
     max-width: 85%;
     line-height: 1.5;
-    white-space: pre-wrap; /* Permite quebras de linha com \n */
+    white-space: pre-wrap;
 }
 .bot-message {
     background-color: #f1f0f0;
@@ -104,7 +104,6 @@
     align-self: flex-end;
 }
 
-/* --- NOVA ÁREA DE INPUT --- */
 .chat-input-area {
     padding: 15px;
     display: flex;
@@ -136,14 +135,8 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
-.send-button:hover {
-    background-color: #0056b3;
-}
-.send-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
+.send-button:hover { background-color: #0056b3; }
+.send-button:disabled { background-color: #cccccc; cursor: not-allowed; }
 
 .iframe-container {
     flex-grow: 1;
@@ -153,4 +146,26 @@
     width: 100%;
     height: 100%;
     border: none;
+}
+
+
+/* --- Estilo Unificado para o Botão "Voltar ao Hub" --- */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid #444;
+    transition: all 0.2s ease;
+}
+.back-button:hover {
+    background-color: #444;
+    transform: translateY(-2px);
 }
