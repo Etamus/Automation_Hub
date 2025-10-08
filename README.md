@@ -4,8 +4,7 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 
 ---
 
-<img width="1917" height="894" alt="{25A22C65-5931-4CFF-B5E1-55881DFB428A}" src="https://github.com/user-attachments/assets/b3ae7b78-0760-4cdf-89bb-e67c3a5e4fce" />
-
+<img width="1901" height="916" alt="{CFFF58B1-9554-4350-8CB9-0C25D66CB5F8}" src="https://github.com/user-attachments/assets/ee88e878-41b5-4639-9604-d77399961ae7" />
 
 ---
 
@@ -84,3 +83,4 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 - PowerShell → Scripts de integração no Windows  
 
 - HTML/CSS/JS → Interface web  
+
