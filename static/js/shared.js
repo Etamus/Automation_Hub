@@ -1,4 +1,4 @@
-// Este script controla o componente de chatbot de feedback com análise de palavras-chave
+// Este script controla o componente de chatbot de feedback com análise de palavras-chave e botões de ação
 document.addEventListener('DOMContentLoaded', () => {
     const fab = document.getElementById('feedback-fab');
     const popup = document.getElementById('feedback-popup');
@@ -23,10 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
         sugestao: ['sugestão', 'feedback', 'ideia', 'melhoria', 'mudar', 'ajustar', 'sugiro', 'poderia', 'poderiam']
     };
 
-    const addMessage = (text, type) => {
+    const addMessage = (text, type, containsHtml = false, extraClass = '') => {
         const messageDiv = document.createElement('div');
-        messageDiv.className = `chat-message ${type}`;
-        messageDiv.textContent = text;
+        messageDiv.className = `chat-message ${type} ${extraClass}`;
+        if (containsHtml) {
+            messageDiv.innerHTML = text;
+        } else {
+            messageDiv.textContent = text;
+        }
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     };
@@ -40,6 +44,29 @@ document.addEventListener('DOMContentLoaded', () => {
         iframeContainer.style.display = 'block';
     };
 
+    const presentFormOption = (formType, introText) => {
+        const formData = forms[formType];
+        
+        // 1. Envia a mensagem de texto
+        addMessage(introText, 'bot-message');
+
+        // 2. Com um pequeno delay, envia o balão com o botão
+        setTimeout(() => {
+            const buttonHtml = `<button class="chat-action-button" data-form="${formType}">${formData.title}</button>`;
+            addMessage(buttonHtml, 'bot-message', true, 'button-bubble');
+
+            // Adiciona o listener para o botão que acabamos de criar
+            const newButton = chatMessages.querySelector(`button[data-form="${formType}"]`);
+            if (newButton) {
+                newButton.addEventListener('click', () => {
+                    chatInput.disabled = true;
+                    sendBtn.disabled = true;
+                    showForm(formType);
+                });
+            }
+        }, 800); // 800ms de delay
+    };
+    
     const resetChat = () => {
         popup.classList.remove('visible');
         setTimeout(() => {
@@ -84,17 +111,14 @@ document.addEventListener('DOMContentLoaded', () => {
              chatInput.disabled = false;
              sendBtn.disabled = false;
         } else if (isDemanda) {
-            // --- TEXTO ALTERADO ---
-            addMessage("Para demandas, siga esse formulário:", 'bot-message');
-            // --- TEMPO AUMENTADO ---
-            setTimeout(() => showForm('demanda'), 2000);
+            presentFormOption('demanda', 'Para demandas, siga esse formulário:');
+            chatInput.disabled = false;
+            sendBtn.disabled = false;
         } else if (isSugestao) {
-            // --- TEXTO ALTERADO ---
-            addMessage("Para sugestões, siga esse formulário:", 'bot-message');
-            // --- TEMPO AUMENTADO ---
-            setTimeout(() => showForm('sugestao'), 2000);
+            presentFormOption('sugestao', 'Para sugestões, siga esse formulário:');
+            chatInput.disabled = false;
+            sendBtn.disabled = false;
         } else { 
-            // --- TEXTO ALTERADO ---
             addMessage("Desculpe, não consegui identificar sua necessidade. Por favor, escreva novamente o que deseja em poucas palavras.", 'bot-message');
             chatInput.disabled = false;
             sendBtn.disabled = false;

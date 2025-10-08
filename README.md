@@ -82,6 +82,3 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 - Playwright → Automação de navegador  
 - PowerShell → Scripts de integração no Windows  
 - HTML/CSS/JS → Interface web  
-
-
-

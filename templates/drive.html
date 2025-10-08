@@ -5,9 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hub Spare Parts - Drive Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/hub.css">
     <link rel="stylesheet" href="/static/css/shared.css">
     <link rel="stylesheet" href="/static/css/drive.css">
+    <style>
+        /* --- ESTILO DO BOTÃO "VOLTAR" ADICIONADO DIRETAMENTE AQUI PARA GARANTIR O FUNCIONAMENTO --- */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            border: 1px solid #444;
+            transition: all 0.2s ease;
+        }
+        .back-button:hover {
+            background-color: #444;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
     <a href="/" class="back-button">&larr; Voltar ao Hub</a>

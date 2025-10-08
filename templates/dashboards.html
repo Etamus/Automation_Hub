@@ -24,7 +24,11 @@
         .subtitle {
             font-size: 1.2rem;
             color: #6c757d;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         .dashboard-container { width: 95vw; height: 85vh; display: none; flex-direction: column; }
         .dashboard-iframe { width: 100%; height: 100%; border: none; border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
@@ -53,7 +57,7 @@
     <div id="selection-screen">
         <div style="text-align: center;">
             <h1 class="main-title">Dashboards</h1>
-            <p class="subtitle">Selecione a plataforma para visualizar o relatório</p>
+            <p class="subtitle"><i class="fas fa-info-circle"></i> <span>Selecione a plataforma para visualizar o relatório</span></p>
         </div>
         <div class="system-selector">
             <label> <input type="radio" name="dashboard_system" value="looker" checked> <img src="/static/icones/looker_logo.png" alt="Logo Looker Studio"> </label>

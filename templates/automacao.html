@@ -7,13 +7,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="/static/css/automacao.css">
     <link rel="stylesheet" href="/static/css/shared.css">
+    <style>
+        /* --- ESTILO DO BOTÃO "VOLTAR" ADICIONADO DIRETAMENTE AQUI PARA GARANTIR O FUNCIONAMENTO --- */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            padding: 10px 20px;
+            background-color: #333; /* Cor preta */
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            border: 1px solid #444;
+            transition: all 0.2s ease;
+        }
+        .back-button:hover {
+            background-color: #444; /* Um pouco mais claro no hover */
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
     <a href="/" class="back-button">&larr; Voltar ao Hub</a>
     <div id="status" class="status-box"></div>
     <div class="container">
         <h1 class="main-title">Painel de Acessos</h1>
-        <p class="subtitle" id="main-subtitle">Selecione a plataforma para acessar</p>
+        <p class="subtitle" id="main-subtitle"><i class="fas fa-info-circle"></i> <span id="subtitle-text">Selecione a plataforma para acessar</span></p>
         <div id="login-area">
             <div class="system-selector">
                 <label> <input type="radio" name="login_system" value="sap" checked> <img src="/static/icones/sap_logo.png" alt="Logo SAP"> </label>
@@ -29,8 +51,8 @@
         </div>
         <div id="loggedin-area" class="hidden">
             <div class="controls">
-                 <button id="main-logout-btn" class="button btn-logout">Deslogar</button>
-                 <button id="bw-extract-btn" class="button hidden">Extrair BW</button>
+                   <button id="main-logout-btn" class="button btn-logout">Deslogar</button>
+                   <button id="bw-extract-btn" class="button hidden">Extrair BW</button>
             </div>
             <div id="sap-tasks-section" class="tasks-section hidden">
                 <div id="collapsible-header" class="collapsible-header">
@@ -40,17 +62,17 @@
                 <div id="collapsible-content" class="collapsible-content">
                     <div class="button-container">
                         {% for nome in macros %}
-                            <div class="task-button" data-task-name="{{ nome }}">
-                                <div class="button-text">{{ nome }}</div>
-                                {% if nome == "Executar ZV62N" %}
-                                    <div class="separator"></div>
-                                    {% if initial_zv62n_file %}
-                                        <a href="/download/{{ initial_zv62n_file }}" class="download-icon" title="Baixar {{ initial_zv62n_file }}"><i class="fas fa-download"></i></a>
-                                    {% else %}
-                                        <a href="#" class="download-icon inactive" title="Arquivo não encontrado."><i class="fas fa-download"></i></a>
+                                <div class="task-button" data-task-name="{{ nome }}">
+                                    <div class="button-text">{{ nome }}</div>
+                                    {% if nome == "Executar ZV62N" %}
+                                        <div class="separator"></div>
+                                        {% if initial_zv62n_file %}
+                                            <a href="/download/{{ initial_zv62n_file }}" class="download-icon" title="Baixar {{ initial_zv62n_file }}"><i class="fas fa-download"></i></a>
+                                        {% else %}
+                                            <a href="#" class="download-icon inactive" title="Arquivo não encontrado."><i class="fas fa-download"></i></a>
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
-                            </div>
+                                </div>
                         {% endfor %}
                     </div>
                 </div>

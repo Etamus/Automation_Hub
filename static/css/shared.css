@@ -1,6 +1,4 @@
 /* --- Estilos para o Botão Flutuante (FAB) e o Chatbot Pop-up --- */
-
-/* O Botão Flutuante */
 .fab {
     position: fixed;
     bottom: 30px;
@@ -24,7 +22,6 @@
     background-color: #0056b3;
 }
 
-/* A "caixinha" Pop-up do Chatbot */
 .chat-popup {
     position: fixed;
     bottom: 100px;
@@ -51,6 +48,7 @@
     visibility: visible;
     transform: translateY(0);
 }
+
 .chat-popup::after {
     content: '';
     position: absolute;
@@ -84,6 +82,7 @@
     flex-direction: column;
     gap: 15px;
 }
+
 .chat-message {
     padding: 10px 15px;
     border-radius: 18px;
@@ -102,6 +101,30 @@
     color: white;
     border-bottom-right-radius: 4px;
     align-self: flex-end;
+}
+
+/* --- NOVO: Estilo para o balão que contém apenas o botão --- */
+.bot-message.button-bubble {
+    background-color: transparent;
+    padding: 0;
+}
+
+.chat-action-button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    background-color: #ffffff; /* Fundo branco para se destacar */
+    color: #007bff;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.chat-action-button:hover {
+    background-color: #007bff;
+    color: white;
 }
 
 .chat-input-area {
@@ -138,34 +161,5 @@
 .send-button:hover { background-color: #0056b3; }
 .send-button:disabled { background-color: #cccccc; cursor: not-allowed; }
 
-.iframe-container {
-    flex-grow: 1;
-    display: none;
-}
-.iframe-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-
-/* --- Estilo Unificado para o Botão "Voltar ao Hub" --- */
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 10;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    font-size: 14px;
-    border: 1px solid #444;
-    transition: all 0.2s ease;
-}
-.back-button:hover {
-    background-color: #444;
-    transform: translateY(-2px);
-}
+.iframe-container { flex-grow: 1; display: none; }
+.iframe-container iframe { width: 100%; height: 100%; border: none; }

@@ -34,7 +34,11 @@ body {
 .subtitle {
     font-size: 1.2rem;
     color: #6c757d;
-    margin-bottom: 60px; /* Aumentado de 40px para 60px */
+    margin-bottom: 40px; /* Reduzi um pouco a margem para compensar o novo layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 /* --- AJUSTE 2: Restaurando a barra de separação --- */

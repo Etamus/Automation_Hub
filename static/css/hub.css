@@ -1,17 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 body {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f0f2f5;
     display: flex;
     justify-content: center;
-    /* --- COMPORTAMENTO REVERTIDO PARA CENTRALIZAR --- */
-    align-items: center; 
+    align-items: flex-start;
+    padding-top: 60px;
     min-height: 100vh;
     margin: 0;
     color: #333;
     box-sizing: border-box;
-    /* O padding-top foi removido daqui */
 }
 
 .hub-container {
@@ -20,53 +19,118 @@ body {
     max-width: 1200px;
 }
 
-/* ... o resto do seu hub.css continua exatamente o mesmo ... */
 .hub-header {
-    margin-bottom: 80px;
+    /* Aumentado para criar mais espaço acima dos cards */
+    margin-bottom: 70px; 
 }
+
 .hub-header h1 {
     font-size: 3rem;
     font-weight: 700;
     color: #1c1e21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 .hub-header p {
     font-size: 1.2rem;
     color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
+
 .hub-cards {
     display: flex;
     justify-content: center;
     gap: 40px;
     flex-wrap: wrap;
 }
+
 .hub-card {
     background-color: #ffffff;
-    padding: 40px;
+    padding: 30px;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     width: 360px;
+    height: 280px; /* Altura aumentada */
     text-decoration: none;
     color: inherit;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .hub-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
 }
+
+/* Área superior do card que contém a animação */
+.card-media-area {
+    position: relative;
+    height: 150px; /* Altura fixa para a área da imagem/ícone */
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* O conteúdo inicial (ícone e título) e a pré-visualização (GIF) */
+.card-content, .card-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+/* A pré-visualização do GIF começa escondida */
+.card-preview {
+    opacity: 0;
+    visibility: hidden;
+}
+.card-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px; /* Cantos arredondados para o GIF */
+}
+
+/* Lógica do hover: esconde o conteúdo inicial e mostra a pré-visualização */
+.hub-card:hover .card-content {
+    opacity: 0;
+    visibility: hidden;
+}
+.hub-card:hover .card-preview {
+    opacity: 1;
+    visibility: visible;
+}
+
 .card-icon {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: #007bff;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 .hub-card h2 {
-    font-size: 1.8rem;
-    margin-top: 0;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    margin: 0;
     color: #1c1e21;
 }
+
+/* O texto de descrição, que agora fica fora da área de animação */
 .hub-card p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.6;
     color: #6c757d;
+    margin: 0;
+    margin-top: auto; /* Empurra a descrição para o fundo do card */
 }

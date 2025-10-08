@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginArea = document.getElementById('login-area');
     const loggedinArea = document.getElementById('loggedin-area');
     const mainSubtitle = document.getElementById('main-subtitle');
+    const subtitleText = document.getElementById('subtitle-text');
     const mainUser = document.getElementById('main-user');
     const mainPass = document.getElementById('main-pass');
     const statusBox = document.getElementById('status');
@@ -68,24 +69,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateUiState() {
-        // ... (o resto do seu arquivo JavaScript continua exatamente o mesmo)
         document.querySelectorAll('.button, .task-button').forEach(btn => btn.disabled = false);
+        
         const anySystemLoggedIn = isSapLoggedIn || isBwLoggedIn;
+        
         loginArea.classList.toggle('hidden', anySystemLoggedIn);
         loggedinArea.classList.toggle('hidden', !anySystemLoggedIn);
+        
         if (isSapLoggedIn) {
-            mainSubtitle.textContent = "Selecione a tarefa de automatização disponível";
+            // --- CORREÇÃO AQUI ---
+            subtitleText.textContent = "Selecione a tarefa de automatização disponível";
             sapTasksSection.classList.remove('hidden');
             bwExtractButton.classList.add('hidden');
             collapsibleHeader.classList.add('open');
             collapsibleContent.style.maxHeight = collapsibleContent.scrollHeight + "px";
+
         } else if (isBwLoggedIn) {
-            mainSubtitle.textContent = "Selecione a tarefa de extração disponível";
+            // --- CORREÇÃO AQUI ---
+            subtitleText.textContent = "Selecione a tarefa de extração disponível";
             sapTasksSection.classList.add('hidden');
             bwExtractButton.classList.remove('hidden');
             bwExtractButton.style.width = '75%';
-        } else {
-            mainSubtitle.textContent = "Selecione a plataforma para acessar";
+        } else { // Nenhum sistema logado
+            // --- CORREÇÃO AQUI ---
+            subtitleText.textContent = "Selecione a plataforma para acessar";
             sapTasksSection.classList.add('hidden');
             bwExtractButton.classList.add('hidden');
             collapsibleHeader.classList.remove('open');
