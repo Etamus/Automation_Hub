@@ -2,6 +2,9 @@
 
 Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal centralizado (Hub) para orquestrar e acessar diversas ferramentas de automação e Business Intelligence. A aplicação oferece uma interface web unificada para executar tarefas, visualizar dashboards e interagir com sistemas legados como **SAP** e portais web como o **BW HANA**.
 
+---
+
+<img width="1912" height="925" alt="{8031914B-9BFA-4310-A921-A798F908F74C}" src="https://github.com/user-attachments/assets/7e0e877d-5630-4520-ac09-0172230a6e40" />
 
 ---
 
@@ -79,5 +82,6 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
 - Playwright → Automação de navegador  
 - PowerShell → Scripts de integração no Windows  
 - HTML/CSS/JS → Interface web  
+
 
 
