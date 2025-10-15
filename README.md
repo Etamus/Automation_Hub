@@ -1,15 +1,18 @@
 # Hub Spare Parts
 
-Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal centralizado (Hub) para orquestrar e acessar diversas ferramentas de automação e Business Intelligence. A aplicação oferece uma interface web unificada para executar tarefas, visualizar dashboards e interagir com sistemas legados como **SAP** e portais web como o **BW HANA**.
+Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal centralizado (Hub) para orquestrar, acessar e interagir com diversas ferramentas de automação e Business Intelligence. 
+
+A aplicação oferece uma interface web unificada para executar tarefas, visualizar dashboards, planilhas e interagir com sistemas legados como **SAP** e portais web como o **BW HANA** em uma interface web única, limpa e moderna, eliminando a necessidade de múltiplos logins ou acesso a sistemas legados.
 
 ---
 
-<img width="1901" height="916" alt="{CFFF58B1-9554-4350-8CB9-0C25D66CB5F8}" src="https://github.com/user-attachments/assets/ee88e878-41b5-4639-9604-d77399961ae7" />
+https://github.com/user-attachments/assets/595761ac-e15c-4739-b1a0-6acbfee3f8f3
 
 ---
 
+## Funcionalidades
 - **Hub de Aplicações:**  
-  Página inicial (gateway) que direciona o usuário para as diferentes ferramentas disponíveis: *Automações*, *Dashboards* e futuras integrações.
+  Página inicial (gateway) que direciona o usuário para as diferentes ferramentas disponíveis: *Automações*, *Dashboards*, *Drive online* e futuras integrações.
 - **Painel de Automação Unificado:**  
   Interface de login única que gerencia o acesso a múltiplos sistemas (SAP e BW HANA).  
   O sistema controla o estado de login, habilitando as automações correspondentes apenas após autenticação bem-sucedida.
@@ -19,6 +22,11 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
   Realiza automações complexas em portais web (como o BW HANA) utilizando a biblioteca **Playwright** — sem depender de executáveis como *chromedriver.exe*.
 - **Portal de Dashboards:**  
   Integra relatórios de BI como **Looker Studio** e **Tableau** diretamente na interface, usando *iframes* para experiência unificada.
+  - **Navegação Hierárquica (`v1.0.3`):** Organiza os dashboards em "Áreas" e "Setores", com um sistema de scrollbar para listas longas.
+  - **Preview Lateral Interativo (`v1.0.4`):** Ao passar o mouse sobre um botão de dashboard, um painel lateral aparece exibindo um GIF de preview e uma descrição detalhada do relatório. O painel de preview exibe etiquetas coloridas que fornecem informações rápidas sobre o dashboard, como Frequência (`Daily`, `Weekly`), Fonte de Dados (`GCP`, `Sheets`) e Foco Principal (`Revenue`, `Costs`).
+
+  https://github.com/user-attachments/assets/be147209-a071-4daf-aa87-2e8ba253e36c 
+
 - **Download de Relatórios:**  
   Permite baixar arquivos gerados pelas automações (como relatórios do Excel) diretamente pela interface web.
 - **Componente de Feedback (FAQ):**  
@@ -27,7 +35,10 @@ Servidor web desenvolvido em **Python** com **Flask**, projetado como um portal 
   Inclui script de limpeza forçada de processos (SAP, Excel, navegadores) para resetar o ambiente após logout ou erros — evitando travamentos.
 - **Tratamento de Erros e Timeouts:**  
   Sistema robusto, lida com falhas de execução, macros travadas (janela de depuração) e timeouts, retornando mensagens claras e executando limpeza automática.
-
+- **Navegador de Arquivos (Drive Online) (`v1.0.1`):**
+  Uma interface web que permite navegar por uma estrutura de pastas no local da VM que hospeda o servidor e executar consultas & downloads de arquivos diretamente, sem a necessidade de VPN ou acesso a drives de rede.
+- **Assistente Virtual Interativo: (`v1.0.2`)**
+  Componente de chatbot flutuante que interpreta a necessidade do usuário através de palavras-chave para direcioná-lo ao formulário correto de **Demandas** ou **Sugestões** (Google Forms).    
 ---
 
 ## Como Executar
