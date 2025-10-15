@@ -18,41 +18,71 @@
     <div class="hub-container">
         <div class="hub-header">
             <h1>
-                <img src="/static/icones/hub_logo.png" alt="Logo" style="height: 40px; margin-right: 15px; vertical-align: middle;">
+                <img src="/static/icones/hub_logo.png" alt="Logo" style="height: 40px; vertical-align: middle;">
                 Hub Spare Parts
             </h1>
-            <p>Selecione a ferramenta que deseja utilizar</p>
+            <p><i class="fas fa-info-circle"></i> <span>Selecione a ferramenta que deseja utilizar</span></p>
         </div>
         <div class="hub-cards">
             <a href="/automacao" class="hub-card">
-                <div class="card-icon"><i class="fas fa-robot"></i></div>
-                <h2>Automatizações</h2>
+                <div class="card-media-area">
+                    <div class="card-preview">
+                        <img src="/static/gifs/automacao.gif" alt="Preview Automações">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fas fa-robot"></i></div>
+                        <h2>Automatizações</h2>
+                    </div>
+                </div>
                 <p>Execute robôs para tarefas de SAP, BW e extração de relatórios.</p>
             </a>
+
             <a href="/dashboards" class="hub-card">
-                <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
-                <h2>Dashboards</h2>
+                <div class="card-media-area">
+                    <div class="card-preview">
+                        <img src="/static/gifs/dashboards.gif" alt="Preview Dashboards">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+                        <h2>Dashboards</h2>
+                    </div>
+                </div>
                 <p>Acesse o portal com os dashboards do Looker Studio e Tableau.</p>
             </a>
+
             <a href="/drive" class="hub-card">
-                <div class="card-icon"> <i class="fas fa-hdd"></i> </div>
-                <h2>Drive (F:) Online</h2>
-                <p>Navegue pelas pastas da rede sem uso de VPN.</p>
+                <div class="card-media-area">
+                    <div class="card-preview">
+                        <img src="/static/gifs/drive.gif" alt="Preview Drive">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-icon"> <i class="fas fa-hdd"></i> </div>
+                        <h2>Drive (F:) Online</h2>
+                    </div>
+                </div>
+                <p>Navegue pelas pastas da rede sem necessidade de uso da VPN.</p>
             </a>
         </div>
     </div>
-    <div class="fab" id="feedback-fab" title="Feedback e Demandas"> <i class="fas fa-comment-dots"></i> </div>
-    <div class="feedback-popup" id="feedback-popup">
-        <div class="modal-header">
-            <h2 id="modal-title">FAQ</h2>
+    
+    <div class="fab" id="feedback-fab" title="Feedback e Demandas">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    <div class="chat-popup" id="feedback-popup">
+        <div class="chat-header">
+            <h2 id="modal-title">Assistente Virtual</h2>
             <button class="close-button" id="modal-close-btn">&times;</button>
         </div>
-        <div class="modal-options" id="modal-options">
-            <button class="option-button" data-form="demanda">Deseja solicitar alguma demanda?</button>
-            <button class="option-button" data-form="sugestao">Tem alguma sugestão?</button>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="iframe-container" id="iframe-container">
+            <iframe src="about:blank" frameborder="0"></iframe>
         </div>
-        <div class="iframe-container" id="iframe-container"> <iframe src="" frameborder="0"></iframe> </div>
+        <div class="chat-input-area" id="chat-input-area">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Descreva o que precisa...">
+            <button class="send-button" id="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
     </div>
+
     <script src="/static/js/shared.js" defer></script>
 </body>
 </html>

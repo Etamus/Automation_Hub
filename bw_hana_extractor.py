@@ -1,13 +1,30 @@
 # ===================================================================
-# == Script de Automação BW HANA (VERSÃO FINAL COM BOTÃO DIRETO)   ==
+# == Script de Automação BW HANA (com limpeza prévia do CSV)       ==
 # ===================================================================
 
 import sys
 import os
+import subprocess
 from playwright.sync_api import sync_playwright, TimeoutError
 
 def run_automation(username, password):
     DOWNLOAD_PATH = "C:\\Users\\Robo01\\Desktop"
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    # --- NOVA ETAPA: Limpeza Prévia do Arquivo Antigo ---
+    # Define o caminho para o arquivo CSV final
+    final_csv_path = os.path.join(DOWNLOAD_PATH, "BW.csv")
+    
+    # Verifica se o arquivo antigo existe e o remove
+    if os.path.exists(final_csv_path):
+        try:
+            print(f"Arquivo antigo encontrado em '{final_csv_path}'. Removendo...")
+            os.remove(final_csv_path)
+            print("Arquivo antigo removido com sucesso.")
+        except Exception as e:
+            # Se não conseguir remover, avisa o erro mas continua a execução
+            print(f"AVISO: Não foi possível remover o arquivo antigo. Causa: {e}")
+    # -----------------------------------------------------------
 
     with sync_playwright() as p:
         browser = None
@@ -21,7 +38,6 @@ def run_automation(username, password):
             page.goto("https://lar-bi-portal.whirlpool.com/irj/portal")
 
             print("Preenchendo credenciais...")
-            # Lembre-se de verificar se os seletores de login estão corretos
             page.fill("#logonuidfield", username)
             page.fill("#logonpassfield", password)
             
@@ -50,27 +66,44 @@ def run_automation(username, password):
             print("Clicando em OK para gerar o relatório...")
             frame_relatorio.locator("#DLG_VARIABLE_dlgBase_BTNOK").click()
             
-            # --- LÓGICA DE EXPORTAÇÃO FINAL E SIMPLIFICADA ---
-            
-            # 1. Define o seletor do botão "Exportar para Excel" usando o ID que você encontrou.
             export_button_selector = "#BUTTON_TOOLBAR_2_btn3_acButton"
             
-            # 2. Espera o botão de exportar estar visível (sinal de que o relatório está pronto).
             print(f"Aguardando o botão de exportação ('{export_button_selector}') aparecer...")
             frame_relatorio.locator(export_button_selector).wait_for(state="visible", timeout=120000)
             
-            # 3. Prepara para o download e clica no botão.
             print("Clicando em 'Exportar para Excel'...")
             with page.expect_download(timeout=120000) as download_info:
                 frame_relatorio.locator(export_button_selector).click()
             
             download = download_info.value
             
-            # 4. Salva o arquivo com o nome e extensão corretos.
-            download_target_path = os.path.join(DOWNLOAD_PATH, "BW.xls")
-            download.save_as(download_target_path)
+            temp_xls_path = os.path.join(DOWNLOAD_PATH, "BW.xls")
+            # O caminho do arquivo final já foi definido no início
             
-            print(f"SUCESSO: Arquivo salvo em {download_target_path}")
+            print(f"Salvando arquivo temporário em {temp_xls_path}")
+            download.save_as(temp_xls_path)
+            
+            print("Iniciando a conversão de XLS para CSV via PowerShell...")
+            caminho_script_conversao = os.path.join(BASE_DIR, "convert_xls_to_csv.ps1")
+            
+            comando_conversao = [
+                "powershell.exe", "-ExecutionPolicy", "Bypass",
+                "-File", caminho_script_conversao,
+                "-CaminhoArquivoXLS", temp_xls_path,
+                "-CaminhoArquivoCSV", final_csv_path
+            ]
+            
+            resultado_conversao = subprocess.run(comando_conversao, capture_output=True, text=True, encoding="utf-8")
+            
+            if resultado_conversao.returncode != 0 or "ERRO:" in resultado_conversao.stdout.upper():
+                raise Exception(f"Falha na conversão para CSV: {resultado_conversao.stdout} {resultado_conversao.stderr}")
+
+            print(resultado_conversao.stdout.strip())
+
+            print(f"Removendo arquivo temporário {temp_xls_path}")
+            os.remove(temp_xls_path)
+            
+            print(f"SUCESSO: Arquivo final salvo em {final_csv_path}")
 
         except TimeoutError as te:
             print(f"ERRO: A automação falhou por timeout. Uma etapa demorou demais. Verifique se os seletores (login, OK, exportar) estão corretos. Detalhes: {te}")

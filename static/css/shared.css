@@ -1,6 +1,4 @@
-/* --- Estilos para o Botão Flutuante (FAB) e o Pop-up de Feedback --- */
-
-/* O Botão Flutuante */
+/* --- Estilos para o Botão Flutuante (FAB) e o Chatbot Pop-up --- */
 .fab {
     position: fixed;
     bottom: 30px;
@@ -14,10 +12,9 @@
     align-items: center;
     justify-content: center;
     font-size: 28px;
-    box-shadow: 0 4px Rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
-    /* --- Z-INDEX AUMENTADO --- */
     z-index: 9998; 
 }
 .fab:hover {
@@ -25,34 +22,34 @@
     background-color: #0056b3;
 }
 
-/* A "caixinha" Pop-up */
-.feedback-popup {
+.chat-popup {
     position: fixed;
-    bottom: 100px; /* Posição acima do FAB */
+    bottom: 100px;
     right: 30px;
     width: 90%;
-    max-width: 350px;
+    max-width: 400px;
+    height: 70vh;
+    max-height: 600px;
     background-color: #ffffff;
-    border-radius: 12px;
+    border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    /* --- Z-INDEX AUMENTADO --- */
     z-index: 9999;
-
-    /* Animação de entrada e saída */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transform-origin: bottom right;
     transition: all 0.3s ease;
 }
-.feedback-popup.visible {
+.chat-popup.visible {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* Seta que aponta para o FAB */
-.feedback-popup::after {
+.chat-popup::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -64,65 +61,105 @@
     border-top: 10px solid #ffffff;
 }
 
-.modal-header {
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px 15px 20px;
-    border-bottom: 1px solid #f0f2f5;
+    flex-shrink: 0;
 }
-.modal-header h2 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-.close-button {
-    font-size: 2rem;
-    color: #999;
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0;
-    line-height: 1;
-}
-.close-button:hover {
-    color: #333;
-}
+.chat-header h2 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+.close-button { font-size: 2rem; color: rgba(255, 255, 255, 0.8); cursor: pointer; border: none; background: none; padding: 0; line-height: 1; }
+.close-button:hover { color: white; }
 
-.modal-options {
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-}
-.option-button {
-    padding: 15px;
-    font-size: 1rem;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    background-color: #f8f9fa;
-    cursor: pointer;
-    text-align: left;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-}
-.option-button:hover {
-    background-color: #e9ecef;
-    border-color: #007bff;
+    gap: 15px;
 }
 
-.iframe-container {
-    display: none;
-    width: 100%;
-    height: 60vh; /* Altura do iframe */
+.chat-message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 85%;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+.bot-message {
+    background-color: #f1f0f0;
+    color: #333;
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+}
+.user-reply {
+    background-color: #007bff;
+    color: white;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+}
+
+/* --- NOVO: Estilo para o balão que contém apenas o botão --- */
+.bot-message.button-bubble {
+    background-color: transparent;
     padding: 0;
-    margin-top: -20px; /* Ajuste para remover espaço extra */
 }
-.iframe-container iframe {
-    width: 100%;
-    height: 100%;
+
+.chat-action-button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    background-color: #ffffff; /* Fundo branco para se destacar */
+    color: #007bff;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.chat-action-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.chat-input-area {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #f0f2f5;
+    background-color: #fff;
+}
+.chat-input {
+    flex-grow: 1;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+.chat-input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+.send-button {
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
     border: none;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
+.send-button:hover { background-color: #0056b3; }
+.send-button:disabled { background-color: #cccccc; cursor: not-allowed; }
+
+.iframe-container { flex-grow: 1; display: none; }
+.iframe-container iframe { width: 100%; height: 100%; border: none; }

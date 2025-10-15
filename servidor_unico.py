@@ -1,5 +1,6 @@
 # ===================================================================
 # == CÓDIGO FINAL E COMPLETO: servidor_unico.py                    ==
+# == (Inclui todas as rotas de páginas e APIs)                     ==
 # ===================================================================
 
 import subprocess
@@ -15,6 +16,9 @@ is_bw_hana_logged_in = False
 
 # --- Caminhos e Configurações ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# A pasta raiz segura para o navegador de arquivos
+DRIVE_ROOT = os.path.join(BASE_DIR, "DRIVE_ONLINE")
+
 SCRIPT_RUNNER_SIMPLES = os.path.join(BASE_DIR, "runner.ps1")
 SCRIPT_RUNNER_SAP_LOGIN = os.path.join(BASE_DIR, "sap_login_runner.ps1")
 SCRIPT_CLEANUP = os.path.join(BASE_DIR, "cleanup_processes.ps1")
@@ -30,8 +34,10 @@ macros_disponiveis = {
 def find_file_by_prefix(directory, prefix):
     try:
         for filename in os.listdir(directory):
-            if filename.startswith(prefix): return filename
-    except FileNotFoundError: return None
+            if filename.startswith(prefix): 
+                return filename
+    except FileNotFoundError: 
+        return None
     return None
 
 # --- ROTAS DE PÁGINAS ---
@@ -55,6 +61,50 @@ def drive():
 
 
 # --- ROTAS DE API (AÇÕES) ---
+
+@app.route('/api/browse')
+def api_browse():
+    relative_path = request.args.get('path', '')
+    safe_relative_path = os.path.normpath(relative_path).lstrip('.\\/')
+    current_path = os.path.join(DRIVE_ROOT, safe_relative_path)
+    
+    if not os.path.abspath(current_path).startswith(os.path.abspath(DRIVE_ROOT)):
+        return jsonify({"error": "Acesso negado."}), 403
+        
+    try:
+        items = os.listdir(current_path)
+        content = []
+        for item in items:
+            item_path = os.path.join(current_path, item)
+            is_dir = os.path.isdir(item_path)
+            content.append({"name": item, "is_dir": is_dir})
+        
+        content.sort(key=lambda x: (not x['is_dir'], x['name'].lower()))
+        
+        return jsonify({
+            "path": safe_relative_path,
+            "content": content
+        })
+    except FileNotFoundError:
+        return jsonify({"error": "Pasta não encontrada."}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/download')
+def api_download():
+    relative_path = request.args.get('path', '')
+    safe_relative_path = os.path.normpath(relative_path).lstrip('.\\/')
+    full_path = os.path.join(DRIVE_ROOT, safe_relative_path)
+    
+    if not os.path.abspath(full_path).startswith(os.path.abspath(DRIVE_ROOT)) or os.path.isdir(full_path):
+        return "Acesso negado.", 403
+        
+    try:
+        directory = os.path.dirname(full_path)
+        filename = os.path.basename(full_path)
+        return send_from_directory(directory, filename, as_attachment=True)
+    except FileNotFoundError:
+        return "Arquivo não encontrado.", 404
 
 @app.route('/executar-macro', methods=['POST'])
 def executar_macro():
@@ -138,7 +188,7 @@ def executar_comando_externo(comando, contexto_tarefa="Tarefa genérica", timeou
         return {"status": "erro", "mensagem": f"Erro crítico durante a {contexto_tarefa}: {erro_msg.strip()}"}
     except Exception as e:
         return {"status": "erro", "mensagem": f"Erro inesperado no Python: {str(e)}"}
-
+# Adicione esta nova rota junto com as outras rotas de API
 
 if __name__ == '__main__':
     print("Servidor Iniciado...")
