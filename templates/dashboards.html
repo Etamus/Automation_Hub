@@ -270,6 +270,13 @@
                     data-preview-tags="Daily,GCP,Management">
                     Visão Gerencial Peças
                 </button>
+                                <button class="view-button"
+                    data-url="https://lookerstudio.google.com/embed/reporting/c451deb6-a994-4f67-8ca4-5ee92b4c0cb9/page/dHrbF"
+                    data-preview-gif="/static/gifs/monitoramento_preview.gif"
+                    data-preview-text="Dashboard com informações concetradas relacionadas as notas fiscais em aberto (pendente de entrega) e seus respectivos prazos e custos."
+                    data-preview-tags="Daily,GCP,Management">
+                    Farol - Monitoramento
+                </button>
                 <button class="back-to-areas-button">← Voltar para Áreas</button>
             </div>
             <div id="dashboards-custos" class="dashboard-options hidden">
@@ -364,6 +371,13 @@
                 data-preview-text="Árvore de planilhas: um centralizador para encontrar e acessar os principais arquivos do Google Sheets utilizados pela equipe."
                 data-preview-tags="Database,Sheets,Data">
                 Sheets tree
+            </button>
+                        <button class="view-button"
+                data-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTAS_P-tSslHcog7VNPnicF8P5GP1fAQRyOg82GpC8eAHJMoNZCyDiDaRTswoRb-zCR3_Z2RoBy5KZO/pubhtml" data-width="600px"
+                data-preview-gif="/static/gifs/sheets_tree_preview.gif"
+                data-preview-text="Manual explicativo contemplando o passo a passo para execução de devolução das peças entregues durante e após a entrega, contendo conteúdos orientativos relacionado aos motivos de devolução."
+                data-preview-tags="Consultation,Drive,Data">
+                Manual de devolução
             </button>
         </div>
     </div>
@@ -464,7 +478,13 @@
                     iframe.style.maxWidth = customMaxWidth;
                 }
 
-
+                // Esconde o chatbot se estivermos abrindo um dashboard do Looker
+                const fab = document.getElementById('feedback-fab');
+                const selectedSystem = document.querySelector('input[name="dashboard_system"]:checked').value;
+                if (selectedSystem === 'looker') {
+                    fab.classList.add('hidden');
+                }
+                
                 dashboardView.appendChild(iframe);
                 selectionScreen.style.display = 'none';
                 dashboardView.style.display = 'flex';
@@ -540,6 +560,9 @@
                 selectionScreen.style.display = 'flex';
                 isViewingDashboard = false;
                 updateBackButton();
+
+                // Mostra o chatbot novamente
+                document.getElementById('feedback-fab').classList.remove('hidden'); 
             }
         });
 
